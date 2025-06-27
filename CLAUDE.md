@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 - This is a simple web app with info about parkour gyms where one can train
-- Uses simple html/css/js
+- Uses simple html/css/ts
 - UI should look modern, sleek and minimal, with flat elements.
 
 ## File structire
