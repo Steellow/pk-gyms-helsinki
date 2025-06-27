@@ -43,7 +43,9 @@ function displayGyms() {
     
     if (!eventsContainer) return;
     
-    const gymsHTML = schedule.map((gym, gymIndex) => {
+    const sortedGyms = [...schedule].sort((a, b) => a.name.localeCompare(b.name));
+    
+    const gymsHTML = sortedGyms.map((gym, gymIndex) => {
         const eventId = `gym-${gymIndex}`;
         const equipment = gym.equipment;
         const mapsId = gym.mapsId;
