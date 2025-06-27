@@ -95,9 +95,16 @@ function setActiveWeekday(selectedWeekday) {
     displayEventsForWeekday(selectedWeekday);
 }
 
+function getCurrentWeekday() {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const today = new Date();
+    return days[today.getDay()];
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize with Monday
-    displayEventsForWeekday('Monday');
+    // Initialize with current weekday
+    const currentWeekday = getCurrentWeekday();
+    setActiveWeekday(currentWeekday);
     
     // Add click handlers to weekday titles
     document.querySelectorAll('.weekday-title').forEach(title => {
