@@ -1,10 +1,113 @@
+import { schedule } from '../../config/schedule.js';
+
+function parseTime(timeStr) {
+    const [hours, minutes = "00"] = timeStr.split(/[.:]/).map(str => str.padStart(2, '0'));
+    return parseInt(hours) * 60 + parseInt(minutes);
+}
+
+function formatTime(timeStr) {
+    const [hours, minutes = "00"] = timeStr.split(/[.:]/).map(str => str.padStart(2, '0'));
+    return `${hours}.${minutes}`;
+}
+
+// Group shifts by weekday for display
+function groupShiftsByWeekday(shifts) {
+    const grouped = {};
+    const weekdayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    
+    shifts.forEach(shift => {
+        if (!grouped[shift.weekday]) {
+            grouped[shift.weekday] = [];
+        }
+        grouped[shift.weekday].push(shift);
+    });
+    
+    // Sort shifts within each day by start time
+    Object.keys(grouped).forEach(weekday => {
+        grouped[weekday].sort((a, b) => parseTime(a.startTime) - parseTime(b.startTime));
+    });
+    
+    // Return in weekday order
+    const orderedGrouped = {};
+    weekdayOrder.forEach(day => {
+        if (grouped[day]) {
+            orderedGrouped[day] = grouped[day];
+        }
+    });
+    
+    return orderedGrouped;
+}
+
+function displayGyms() {
+    const eventsContainer = document.getElementById('gyms-container');
+    
+    if (!eventsContainer) return;
+    
+    const gymsHTML = schedule.map((gym, gymIndex) => {
+        const eventId = `gym-${gymIndex}`;
+        const equipment = gym.equipment;
+        const mapsId = gym.mapsId;
+        const price = gym.price;
+        
+        // Group shifts by weekday
+        const groupedShifts = groupShiftsByWeekday(gym.shifts);
+        const shiftsHTML = Object.entries(groupedShifts)
+            .map(([weekday, shifts]) => {
+                const dayShifts = shifts.map(shift => 
+                    `${formatTime(shift.startTime)} – ${formatTime(shift.endTime)}`
+                ).join(', ');
+                return `<div class="weekday-shifts"><strong>${weekday}:</strong> ${dayShifts}</div>`;
+            }).join('');
+        
+        return `
+            <div class="gym-event">
+                <div class="event-header" onclick="toggleGym('${eventId}')">
+                    <div class="toggle-arrow" id="arrow-${eventId}"></div>
+                    <div class="event-main">
+                        <div class="gym-name">${gym.name}</div>
+                    </div>
+                </div>
+                <div class="event-details" id="details-${eventId}">
+                    <div class="equipment">
+                        ${price ? `<div class="price-item">💰 ${price}</div>` : ''}
+                        ${equipment ? equipment.map(item => `<div class="equipment-item">${item}</div>`).join('') : ''}
+                        ${mapsId ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank">🗺️ Google Maps</a></div>` : ''}
+                        <div class="shifts-section">
+                            <div class="shifts-title">Open hours:</div>
+                            ${shiftsHTML}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    eventsContainer.innerHTML = gymsHTML;
+}
+
+window.toggleGym = function(eventId) {
+    const arrow = document.getElementById(`arrow-${eventId}`);
+    const details = document.getElementById(`details-${eventId}`);
+    
+    if (!details) return;
+    
+    const isExpanded = details.classList.contains('expanded');
+    
+    if (isExpanded) {
+        arrow.classList.remove('expanded');
+        details.classList.remove('expanded');
+    } else {
+        arrow.classList.add('expanded');
+        details.classList.add('expanded');
+    }
+}
+
 export function renderGymsPage() {
     const pageContent = document.getElementById('page-content');
     
     pageContent.innerHTML = `
-        <div class="placeholder-content">
-            <h2>Sisätreenipaikat</h2>
-            <p>lol</p>
-        </div>
+        <div id="gyms-container"></div>
     `;
+    
+    displayGyms();
 }

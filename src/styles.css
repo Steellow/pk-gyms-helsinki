@@ -205,6 +205,28 @@ h2 {
     text-decoration: underline;
 }
 
+.shifts-section {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid #e9ecef;
+}
+
+.shifts-title {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #495057;
+}
+
+.weekday-shifts {
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #666666;
+}
+
+.weekday-shifts strong {
+    color: #495057;
+}
+
 .no-events {
     color: #999999;
     font-style: italic;
