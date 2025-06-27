@@ -6,7 +6,7 @@
 
 ## File structire
 
+- Claude can freely move, create, edit, delete files
 - All code files should be inside src/ folder, or in a subfolder inside of it
-    - Claude can freely move, create, edit, delete files inside of src/ folder
 - All config files are in config/ folder
-    - Claude can create boilerplate stuff here when needed
+    - schedule.ts contains all the info we need about the shifts we are showing in the UI
