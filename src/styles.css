@@ -1,122 +1,171 @@
-body {
-    font-family: Helvetica, Arial, sans-serif;
+/* Reset and base styles */
+* {
     margin: 0;
-    padding: 40px 20px;
-    background-color: #ffffff;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+    background: #fdfdfd;
+    color: #1f2937;
+    line-height: 1.65;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 720px;
     margin: 0 auto;
+    padding: 60px 24px;
 }
 
+/* Typography */
 h1 {
-    color: #000000;
-    font-size: 48px;
-    font-weight: bold;
+    color: #111827;
+    font-size: 2.25rem;
+    font-weight: 700;
     margin: 0 0 16px 0;
-    letter-spacing: -1px;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
 }
 
 .subtitle {
-    color: #666666;
-    font-size: 18px;
-    font-weight: 300;
-    margin: 0 0 32px 0;
-    line-height: 1.5;
-}
-
-.navigation {
-    display: flex;
-    gap: 24px;
-    margin-bottom: 32px;
-}
-
-.nav-link {
-    color: #666666;
-    font-size: 16px;
-    font-weight: 300;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-    cursor: pointer;
-}
-
-.nav-link:hover {
-    background-color: #f0f0f0;
-    color: #000000;
-}
-
-.nav-link.active {
-    font-weight: 500;
-    color: #000000;
-    background-color: #e8e8e8;
-}
-
-.divider {
-    width: 100%;
-    height: 1px;
-    background-color: #cccccc;
-    margin: 0 0 40px 0;
+    color: #6b7280;
+    font-size: 1.125rem;
+    font-weight: 400;
+    margin: 0 0 48px 0;
+    line-height: 1.6;
+    max-width: 600px;
 }
 
 h2 {
-    color: #000000;
-    font-size: 24px;
-    font-weight: 300;
-    margin: 0 0 20px 0;
+    color: #111827;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 48px 0 24px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
 }
 
+/* Navigation */
+.navigation {
+    display: flex;
+    gap: 0;
+    margin-bottom: 48px;
+    border-bottom: 1px solid #f3f4f6;
+    padding-bottom: 0;
+}
+
+.nav-link {
+    color: #6b7280;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 12px 0 16px 0;
+    margin-right: 40px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #374151;
+}
+
+.nav-link.active {
+    color: #111827;
+    font-weight: 600;
+    border-bottom-color: #3b82f6;
+}
+
+.divider {
+    display: none;
+}
+
+/* Weekdays */
 .weekdays {
     display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
+    gap: 8px;
+    margin-bottom: 32px;
     flex-wrap: nowrap;
     overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.weekdays::-webkit-scrollbar {
+    height: 4px;
+}
+
+.weekdays::-webkit-scrollbar-track {
+    background: #f9fafb;
+    border-radius: 2px;
+}
+
+.weekdays::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 2px;
 }
 
 .weekday-title {
-    color: #666666;
-    font-size: 16px;
-    font-weight: 300;
-    margin: 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
     cursor: pointer;
-    padding: 8px 10px;
-    border-radius: 6px;
-    transition: color 0.2s ease, background-color 0.2s ease;
+    transition: all 0.15s ease;
     white-space: nowrap;
+    background: #ffffff;
     flex-shrink: 0;
-    position: relative;
 }
 
 .weekday-title::before {
     content: attr(data-weekday);
-    font-weight: bold;
+    font-weight: 600;
     height: 0;
     visibility: hidden;
     overflow: hidden;
     user-select: none;
     pointer-events: none;
-    display: block;
+    display: none;
 }
 
 .weekday-title:hover {
-    background-color: #f0f0f0;
-    color: #000000;
+    background: #f9fafb;
+    border-color: #d1d5db;
+    color: #374151;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .weekday-title.active {
-    font-weight: bold;
-    color: #000000;
-    background-color: #e8e8e8;
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+    font-weight: 600;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.15);
 }
 
+/* Gym events */
 .gym-event {
-    background-color: #f8f8f8;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 12px;
+    background: #ffffff;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.gym-event:hover {
+    border-color: #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    transform: translateY(-1px);
 }
 
 .event-header {
@@ -129,15 +178,16 @@ h2 {
 .toggle-arrow {
     width: 0;
     height: 0;
-    border-left: 6px solid #666666;
+    border-left: 6px solid #9ca3af;
     border-top: 4px solid transparent;
     border-bottom: 4px solid transparent;
-    margin-right: 12px;
-    transition: transform 0.2s ease;
+    margin-right: 16px;
+    transition: all 0.2s ease;
 }
 
 .toggle-arrow.expanded {
     transform: rotate(90deg);
+    border-left-color: #6b7280;
 }
 
 .event-main {
@@ -148,18 +198,25 @@ h2 {
 }
 
 .gym-name {
-    font-weight: 500;
-    font-size: 16px;
-    color: #000000;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #111827;
     margin: 0;
+    line-height: 1.4;
 }
 
 .shift {
-    color: #666666;
-    font-size: 14px;
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: #f9fafb;
+    padding: 6px 12px;
+    border-radius: 6px;
     margin: 0;
+    border: 1px solid #f3f4f6;
 }
 
+/* Event details */
 .event-details {
     overflow: hidden;
     transition: all 0.3s ease;
@@ -170,64 +227,193 @@ h2 {
 }
 
 .event-details.expanded {
-    max-height: 200px;
+    max-height: 500px;
     opacity: 1;
-    padding-top: 12px;
+    padding-top: 20px;
     margin-top: 0;
 }
 
 .equipment {
-    color: #666666;
-    font-size: 14px;
-    padding-left: 18px;
+    color: #6b7280;
+    font-size: 0.95rem;
+    padding-left: 22px;
+    line-height: 1.6;
 }
 
-.equipment-item, .price-item {
-    margin-bottom: 2px;
+.equipment-item {
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.equipment-item::before {
+    content: '•';
+    color: #9ca3af;
+    position: absolute;
+    left: -14px;
+    font-weight: 600;
 }
 
 .price-item {
-    font-weight: 500;
-    color: #495057;
+    color: #065f46;
+    font-weight: 600;
+    background: #ecfdf5;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    display: inline-block;
+    margin: 6px 0;
+    border: 1px solid #d1fae5;
 }
 
 .maps-link {
-    margin-top: 8px;
+    margin-top: 16px;
 }
 
 .maps-link a {
-    color: #007AFF;
+    color: #3b82f6;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: 1px solid #dbeafe;
+    border-radius: 8px;
+    background: #eff6ff;
+    display: inline-block;
+    transition: all 0.2s ease;
 }
 
 .maps-link a:hover {
-    text-decoration: underline;
+    background: #dbeafe;
+    border-color: #bfdbfe;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
 }
 
+/* Shifts section */
 .shifts-section {
-    margin-top: 12px;
-    padding-top: 8px;
-    border-top: 1px solid #e9ecef;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #f3f4f6;
 }
 
 .shifts-title {
-    font-weight: 500;
-    margin-bottom: 6px;
-    color: #495057;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #111827;
+    font-size: 1rem;
 }
 
 .weekday-shifts {
-    margin-bottom: 4px;
-    font-size: 14px;
-    color: #666666;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: #6b7280;
+    line-height: 1.6;
+    padding: 10px 16px;
+    background: #f9fafb;
+    border-radius: 8px;
+    border-left: 3px solid #e5e7eb;
 }
 
 .weekday-shifts strong {
-    color: #495057;
+    color: #374151;
+    font-weight: 600;
 }
 
+/* No events state */
 .no-events {
-    color: #999999;
+    color: #9ca3af;
     font-style: italic;
+    text-align: center;
+    padding: 64px 32px;
+    background: #fafafa;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    font-size: 1.1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 40px 20px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+        margin-bottom: 36px;
+    }
+    
+    h2 {
+        font-size: 1.25rem;
+        margin: 36px 0 20px 0;
+    }
+    
+    .navigation {
+        margin-bottom: 36px;
+    }
+    
+    .nav-link {
+        margin-right: 28px;
+        padding: 12px 0 14px 0;
+        font-size: 0.9rem;
+    }
+    
+    .gym-event {
+        padding: 20px;
+    }
+    
+    .event-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .shift {
+        align-self: flex-start;
+    }
+    
+    .weekdays {
+        gap: 6px;
+        margin-bottom: 28px;
+    }
+    
+    .weekday-title {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 32px 16px;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    .gym-event {
+        padding: 16px;
+    }
+    
+    .nav-link {
+        margin-right: 20px;
+    }
+}
+
+/* Subtle animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.gym-event {
+    animation: fadeIn 0.4s ease forwards;
 }
