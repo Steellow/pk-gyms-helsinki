@@ -3,6 +3,7 @@ export const schedule = [
         name: "Taitoliikuntakeskus",
         equipment: ["🤸 Trampliineja", "🏃 Airtrack", "🔥 Foam pit"],
         mapsId: "dPQnoi2VU5wx548X7",
+        price: "15€ / session",
         shifts: [
             {
                 weekday: "Monday",
@@ -29,7 +30,8 @@ export const schedule = [
     {
         name: "Calisthenics Lab",
         equipment: ["💪 Pull-up bars", "🤲 Parallettes", "💍 Rings"],
-        mapsId: "abc123def456",
+        mapsId: "dPQnoi2VU5wx548X7",
+        price: "12€ / day pass",
         shifts: [
             {
                 weekday: "Monday",
@@ -57,6 +59,7 @@ export const schedule = [
         name: "Urban Movement",
         equipment: ["🏃‍♂️ Parkour course", "📦 Vaulting boxes", "⚖️ Balance beams"],
         mapsId: "xyz789uvw012",
+        price: "20€ / monthly",
         shifts: [
             {
                 weekday: "Tuesday",

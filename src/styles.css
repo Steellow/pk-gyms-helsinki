@@ -154,8 +154,13 @@ h2 {
     padding-left: 18px;
 }
 
-.equipment-item {
+.equipment-item, .price-item {
     margin-bottom: 2px;
+}
+
+.price-item {
+    font-weight: 500;
+    color: #495057;
 }
 
 .maps-link {
