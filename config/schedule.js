@@ -1,17 +1,4 @@
-interface Gym {
-    name: string
-    shifts: Shift[]
-}
-
-interface Shift {
-    weekday: Weekday
-    startTime: string
-    endTime: string
-}
-
-type Weekday = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturady" | "Sunday"
-
-const schedule: Gym[] = [
+export const schedule = [
     {
         name: "Taitoliikuntakeskus",
         shifts: [
@@ -56,7 +43,7 @@ const schedule: Gym[] = [
                 endTime: "13"
             },
             {
-                weekday: "Saturady",
+                weekday: "Saturday",
                 startTime: "09",
                 endTime: "17"
             }
@@ -76,7 +63,7 @@ const schedule: Gym[] = [
                 endTime: "21"
             },
             {
-                weekday: "Saturady",
+                weekday: "Saturday",
                 startTime: "11",
                 endTime: "16"
             },
@@ -87,4 +74,4 @@ const schedule: Gym[] = [
             }
         ]
     }
-]
+];

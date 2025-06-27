@@ -1,9 +1,0 @@
-{
-  "name": "pk-vapaavuorot-2",
-  "version": "1.0.0",
-  "author": "Hannes Kinnunen",
-  "type": "commonjs",
-  "devDependencies": {
-    "typescript": "^5.8.3"
-  }
-}
