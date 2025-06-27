@@ -47,6 +47,38 @@
             margin: 0 0 20px 0;
         }
         
+        .weekdays {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+        
+        .weekday-title {
+            color: #666666;
+            font-size: 16px;
+            font-weight: 300;
+            margin: 0;
+            cursor: pointer;
+            padding: 8px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .weekday-title:hover {
+            background-color: #f0f0f0;
+            color: #000000;
+        }
+        
+        .weekday-title.active {
+            font-weight: bold;
+            color: #000000;
+            background-color: #e8e8e8;
+        }
+        
         .gym-event {
             background-color: #f8f8f8;
             border-radius: 8px;
@@ -78,8 +110,16 @@
         <p class="subtitle">Find parkour gyms and training spaces in your area. This text will be updated with more specific information about available training times and locations.</p>
         <div class="divider"></div>
         
-        <h2>Monday</h2>
-        <div id="monday-events"></div>
+        <div class="weekdays">
+            <h2 class="weekday-title active" data-weekday="Monday">Monday</h2>
+            <h2 class="weekday-title" data-weekday="Tuesday">Tuesday</h2>
+            <h2 class="weekday-title" data-weekday="Wednesday">Wednesday</h2>
+            <h2 class="weekday-title" data-weekday="Thursday">Thursday</h2>
+            <h2 class="weekday-title" data-weekday="Friday">Friday</h2>
+            <h2 class="weekday-title" data-weekday="Saturday">Saturday</h2>
+            <h2 class="weekday-title" data-weekday="Sunday">Sunday</h2>
+        </div>
+        <div id="events-container"></div>
     </div>
     
     <script type="module" src="magic.js"></script>

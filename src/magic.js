@@ -10,28 +10,28 @@ function formatTime(timeStr) {
     return `${hours}.${minutes}`;
 }
 
-function getMondayEvents() {
+function getEventsForWeekday(weekday) {
     return schedule
         .map(gym => ({
             name: gym.name,
-            shifts: gym.shifts.filter(shift => shift.weekday === "Monday")
+            shifts: gym.shifts.filter(shift => shift.weekday === weekday)
         }))
         .filter(gym => gym.shifts.length > 0)
         .sort((a, b) => parseTime(a.shifts[0].startTime) - parseTime(b.shifts[0].startTime));
 }
 
-function displayMondayEvents() {
-    const mondayEvents = getMondayEvents();
-    const eventsContainer = document.getElementById('monday-events');
+function displayEventsForWeekday(weekday) {
+    const events = getEventsForWeekday(weekday);
+    const eventsContainer = document.getElementById('events-container');
     
     if (!eventsContainer) return;
     
-    if (mondayEvents.length === 0) {
-        eventsContainer.innerHTML = '<p class="no-events">No events scheduled for Monday.</p>';
+    if (events.length === 0) {
+        eventsContainer.innerHTML = `<p class="no-events">No events scheduled for ${weekday}.</p>`;
         return;
     }
     
-    const eventsHTML = mondayEvents.map(gym => {
+    const eventsHTML = events.map(gym => {
         const shiftsHTML = gym.shifts.map(shift => 
             `<div class="shift">${formatTime(shift.startTime)} – ${formatTime(shift.endTime)}</div>`
         ).join('');
@@ -47,4 +47,28 @@ function displayMondayEvents() {
     eventsContainer.innerHTML = eventsHTML;
 }
 
-document.addEventListener('DOMContentLoaded', displayMondayEvents);
+function setActiveWeekday(selectedWeekday) {
+    document.querySelectorAll('.weekday-title').forEach(title => {
+        title.classList.remove('active');
+    });
+    
+    const selectedTitle = document.querySelector(`[data-weekday="${selectedWeekday}"]`);
+    if (selectedTitle) {
+        selectedTitle.classList.add('active');
+    }
+    
+    displayEventsForWeekday(selectedWeekday);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize with Monday
+    displayEventsForWeekday('Monday');
+    
+    // Add click handlers to weekday titles
+    document.querySelectorAll('.weekday-title').forEach(title => {
+        title.addEventListener('click', () => {
+            const weekday = title.getAttribute('data-weekday');
+            setActiveWeekday(weekday);
+        });
+    });
+});
