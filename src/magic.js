@@ -7,7 +7,7 @@ function parseTime(timeStr) {
 
 function formatTime(timeStr) {
     const [hours, minutes = "00"] = timeStr.split(/[.:]/).map(str => str.padStart(2, '0'));
-    return `${hours}:${minutes}`;
+    return `${hours}.${minutes}`;
 }
 
 function getMondayEvents() {
