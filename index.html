@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parkour vapaavuorot</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="src/styles.css">
 </head>
 <body>
     <div class="container">
@@ -12,7 +12,7 @@
         <p class="subtitle">Find parkour gyms and training spaces in your area. This text will be updated with more specific information about available training times and locations.</p>
         
         <nav class="navigation">
-            <a class="nav-link active" data-path="/" onclick="navigateTo('/')">Vapaavuorot</a>
+            <a class="nav-link" data-path="/" onclick="navigateTo('/')">Vapaavuorot</a>
             <a class="nav-link" data-path="/gyms" onclick="navigateTo('/gyms')">Sisätreenipaikat</a>
         </nav>
         
@@ -21,6 +21,6 @@
         <div id="page-content"></div>
     </div>
     
-    <script type="module" src="app.js"></script>
+    <script type="module" src="src/app.js"></script>
 </body>
 </html>
