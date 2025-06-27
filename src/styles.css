@@ -91,16 +91,63 @@ h2 {
     margin-bottom: 12px;
 }
 
+.event-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid #666666;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    margin-right: 12px;
+    transition: transform 0.2s ease;
+}
+
+.toggle-arrow.expanded {
+    transform: rotate(90deg);
+}
+
+.event-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
 .gym-name {
     font-weight: 500;
     font-size: 16px;
     color: #000000;
-    margin-bottom: 8px;
+    margin: 0;
 }
 
 .shift {
     color: #666666;
     font-size: 14px;
+    margin: 0;
+}
+
+.event-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    margin-top: 0;
+}
+
+.event-details.expanded {
+    max-height: 100px;
+    margin-top: 12px;
+}
+
+.equipment {
+    color: #666666;
+    font-size: 14px;
+    padding-left: 18px;
 }
 
 .no-events {

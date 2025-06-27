@@ -1,6 +1,7 @@
 export const schedule = [
     {
         name: "Taitoliikuntakeskus",
+        equipment: "Trampliineja, airtrack",
         shifts: [
             {
                 weekday: "Monday",

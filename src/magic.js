@@ -31,20 +31,50 @@ function displayEventsForWeekday(weekday) {
         return;
     }
     
-    const eventsHTML = events.map(gym => {
+    const eventsHTML = events.map((gym, gymIndex) => {
         const shiftsHTML = gym.shifts.map(shift => 
             `<div class="shift">${formatTime(shift.startTime)} – ${formatTime(shift.endTime)}</div>`
         ).join('');
         
+        const eventId = `event-${gymIndex}`;
+        const hasEquipment = schedule.find(g => g.name === gym.name)?.equipment;
+        
         return `
             <div class="gym-event">
-                <div class="gym-name">${gym.name}</div>
-                ${shiftsHTML}
+                <div class="event-header" onclick="toggleEvent('${eventId}')">
+                    <div class="toggle-arrow" id="arrow-${eventId}"></div>
+                    <div class="event-main">
+                        <div class="gym-name">${gym.name}</div>
+                        ${shiftsHTML}
+                    </div>
+                </div>
+                ${hasEquipment ? `
+                    <div class="event-details" id="details-${eventId}">
+                        <div class="equipment">Equipment: ${hasEquipment}</div>
+                    </div>
+                ` : ''}
             </div>
         `;
     }).join('');
     
     eventsContainer.innerHTML = eventsHTML;
+}
+
+window.toggleEvent = function(eventId) {
+    const arrow = document.getElementById(`arrow-${eventId}`);
+    const details = document.getElementById(`details-${eventId}`);
+    
+    if (!details) return; // No equipment to show
+    
+    const isExpanded = details.classList.contains('expanded');
+    
+    if (isExpanded) {
+        arrow.classList.remove('expanded');
+        details.classList.remove('expanded');
+    } else {
+        arrow.classList.add('expanded');
+        details.classList.add('expanded');
+    }
 }
 
 function setActiveWeekday(selectedWeekday) {
