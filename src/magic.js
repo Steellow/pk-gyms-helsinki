@@ -6,7 +6,8 @@ function getMondayEvents() {
             name: gym.name,
             shifts: gym.shifts.filter(shift => shift.weekday === "Monday")
         }))
-        .filter(gym => gym.shifts.length > 0);
+        .filter(gym => gym.shifts.length > 0)
+        .sort((a, b) => parseInt(a.shifts[0].startTime) - parseInt(b.shifts[0].startTime));
 }
 
 function displayMondayEvents() {
