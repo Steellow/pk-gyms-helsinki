@@ -1,7 +1,8 @@
 export const schedule = [
     {
         name: "Taitoliikuntakeskus",
-        equipment: ["Trampliineja", "Airtrack", "Foam pit"],
+        equipment: ["🤸 Trampliineja", "🏃 Airtrack", "🔥 Foam pit"],
+        mapsId: "dPQnoi2VU5wx548X7",
         shifts: [
             {
                 weekday: "Monday",
@@ -27,7 +28,8 @@ export const schedule = [
     },
     {
         name: "Calisthenics Lab",
-        equipment: ["Pull-up bars", "Parallettes", "Rings"],
+        equipment: ["💪 Pull-up bars", "🤲 Parallettes", "💍 Rings"],
+        mapsId: "abc123def456",
         shifts: [
             {
                 weekday: "Monday",
@@ -53,7 +55,8 @@ export const schedule = [
     },
     {
         name: "Urban Movement",
-        equipment: ["Parkour course", "Vaulting boxes", "Balance beams"],
+        equipment: ["🏃‍♂️ Parkour course", "📦 Vaulting boxes", "⚖️ Balance beams"],
+        mapsId: "xyz789uvw012",
         shifts: [
             {
                 weekday: "Tuesday",

@@ -37,7 +37,9 @@ function displayEventsForWeekday(weekday) {
         ).join('');
         
         const eventId = `event-${gymIndex}`;
-        const equipment = schedule.find(g => g.name === gym.name)?.equipment;
+        const gymData = schedule.find(g => g.name === gym.name);
+        const equipment = gymData?.equipment;
+        const mapsId = gymData?.mapsId;
         
         return `
             <div class="gym-event">
@@ -48,11 +50,11 @@ function displayEventsForWeekday(weekday) {
                         ${shiftsHTML}
                     </div>
                 </div>
-                ${equipment ? `
+                ${(equipment || mapsId) ? `
                     <div class="event-details" id="details-${eventId}">
                         <div class="equipment">
-                            <div class="equipment-title">Equipment:</div>
-                            ${equipment.map(item => `<div class="equipment-item">• ${item}</div>`).join('')}
+                            ${equipment ? equipment.map(item => `<div class="equipment-item">${item}</div>`).join('') : ''}
+                            ${mapsId ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank">🗺️ Google Maps</a></div>` : ''}
                         </div>
                     </div>
                 ` : ''}
