@@ -1,7 +1,7 @@
 export const schedule = [
     {
         name: "Taitoliikuntakeskus",
-        equipment: "Trampliineja, airtrack",
+        equipment: ["Trampliineja", "Airtrack", "Foam pit"],
         shifts: [
             {
                 weekday: "Monday",
@@ -27,6 +27,7 @@ export const schedule = [
     },
     {
         name: "Calisthenics Lab",
+        equipment: ["Pull-up bars", "Parallettes", "Rings"],
         shifts: [
             {
                 weekday: "Monday",
@@ -52,6 +53,7 @@ export const schedule = [
     },
     {
         name: "Urban Movement",
+        equipment: ["Parkour course", "Vaulting boxes", "Balance beams"],
         shifts: [
             {
                 weekday: "Tuesday",

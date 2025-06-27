@@ -37,7 +37,7 @@ function displayEventsForWeekday(weekday) {
         ).join('');
         
         const eventId = `event-${gymIndex}`;
-        const hasEquipment = schedule.find(g => g.name === gym.name)?.equipment;
+        const equipment = schedule.find(g => g.name === gym.name)?.equipment;
         
         return `
             <div class="gym-event">
@@ -48,9 +48,12 @@ function displayEventsForWeekday(weekday) {
                         ${shiftsHTML}
                     </div>
                 </div>
-                ${hasEquipment ? `
+                ${equipment ? `
                     <div class="event-details" id="details-${eventId}">
-                        <div class="equipment">Equipment: ${hasEquipment}</div>
+                        <div class="equipment">
+                            <div class="equipment-title">Equipment:</div>
+                            ${equipment.map(item => `<div class="equipment-item">• ${item}</div>`).join('')}
+                        </div>
                     </div>
                 ` : ''}
             </div>

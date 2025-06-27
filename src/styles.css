@@ -154,6 +154,16 @@ h2 {
     padding-left: 18px;
 }
 
+.equipment-title {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.equipment-item {
+    margin-bottom: 2px;
+    padding-left: 8px;
+}
+
 .no-events {
     color: #999999;
     font-style: italic;
