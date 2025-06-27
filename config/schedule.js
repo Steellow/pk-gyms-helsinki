@@ -4,7 +4,7 @@ export const schedule = [
         shifts: [
             {
                 weekday: "Monday",
-                startTime: "11",
+                startTime: "11.20",
                 endTime: "16"
             },
             {

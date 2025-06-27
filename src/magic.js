@@ -1,5 +1,15 @@
 import { schedule } from '../config/schedule.js';
 
+function parseTime(timeStr) {
+    const [hours, minutes = "00"] = timeStr.split(/[.:]/).map(str => str.padStart(2, '0'));
+    return parseInt(hours) * 60 + parseInt(minutes);
+}
+
+function formatTime(timeStr) {
+    const [hours, minutes = "00"] = timeStr.split(/[.:]/).map(str => str.padStart(2, '0'));
+    return `${hours}:${minutes}`;
+}
+
 function getMondayEvents() {
     return schedule
         .map(gym => ({
@@ -7,7 +17,7 @@ function getMondayEvents() {
             shifts: gym.shifts.filter(shift => shift.weekday === "Monday")
         }))
         .filter(gym => gym.shifts.length > 0)
-        .sort((a, b) => parseInt(a.shifts[0].startTime) - parseInt(b.shifts[0].startTime));
+        .sort((a, b) => parseTime(a.shifts[0].startTime) - parseTime(b.shifts[0].startTime));
 }
 
 function displayMondayEvents() {
@@ -23,7 +33,7 @@ function displayMondayEvents() {
     
     const eventsHTML = mondayEvents.map(gym => {
         const shiftsHTML = gym.shifts.map(shift => 
-            `<div class="shift">${shift.startTime}:00 - ${shift.endTime}:00</div>`
+            `<div class="shift">${formatTime(shift.startTime)} – ${formatTime(shift.endTime)}</div>`
         ).join('');
         
         return `
