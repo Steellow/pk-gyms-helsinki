@@ -63,9 +63,21 @@
             cursor: pointer;
             padding: 8px 10px;
             border-radius: 6px;
-            transition: all 0.2s ease;
+            transition: color 0.2s ease, background-color 0.2s ease;
             white-space: nowrap;
             flex-shrink: 0;
+            position: relative;
+        }
+        
+        .weekday-title::before {
+            content: attr(data-weekday);
+            font-weight: bold;
+            height: 0;
+            visibility: hidden;
+            overflow: hidden;
+            user-select: none;
+            pointer-events: none;
+            display: block;
         }
         
         .weekday-title:hover {
