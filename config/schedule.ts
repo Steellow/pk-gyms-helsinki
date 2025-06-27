@@ -17,7 +17,7 @@ const schedule: Gym[] = [
         shifts: [
             {
                 weekday: "Monday",
-                startTime: "10",
+                startTime: "11",
                 endTime: "16"
             },
             {
@@ -42,7 +42,7 @@ const schedule: Gym[] = [
         shifts: [
             {
                 weekday: "Monday",
-                startTime: "11",
+                startTime: "10",
                 endTime: "14"
             },
             {
