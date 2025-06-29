@@ -5,7 +5,6 @@ import {
     parseTime, 
     formatTime, 
     processEquipment,
-    sortGyms,
     generateLinksHTML,
     createToggleHandler
 } from '../utils/gym-utils.js';

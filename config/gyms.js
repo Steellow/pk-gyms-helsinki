@@ -69,8 +69,7 @@ export const gyms = [
                 startTime: "18.15",
                 endTime: "20.15"
             }
-        },
-        actualParkourGym: true
+        }
     },
     {
         name: "Parkour Akatemia Lauttasaari",

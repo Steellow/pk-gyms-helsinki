@@ -62,7 +62,7 @@ export function processEquipment(gym) {
     return equipment;
 }
 
-export function sortGyms(gyms, sortBy = 'alphabetical') {
+export function sortGyms(gyms) {
     return [...gyms].sort((a, b) => {
         // First sort by actualParkourGym or isTelegramGroup (true comes first)
         const aIsActualParkour = !!(a.actualParkourGym || a.isTelegramGroup);
@@ -80,20 +80,7 @@ export function sortGyms(gyms, sortBy = 'alphabetical') {
             return aHasDisclaimer ? 1 : -1;
         }
         
-        // Finally sort by custom criteria
-        if (sortBy === 'startTime' && a.shifts && b.shifts) {
-            try {
-                const aFirstShift = Object.values(a.shifts)[0];
-                const bFirstShift = Object.values(b.shifts)[0];
-                if (aFirstShift && bFirstShift) {
-                    return parseTime(aFirstShift.startTime) - parseTime(bFirstShift.startTime);
-                }
-            } catch (error) {
-                console.error(`Error parsing start times for "${a.name}" or "${b.name}":`, error);
-            }
-        }
-        
-        // Default: alphabetical
+        // Finally sort alphabetically
         return a.name.localeCompare(b.name);
     });
 }

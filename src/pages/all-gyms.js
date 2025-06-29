@@ -60,7 +60,7 @@ function displayGyms() {
     // Validate gym data and log errors
     validateAndProcessGyms(gyms);
     
-    const sortedGyms = sortGyms(gyms, 'alphabetical');
+    const sortedGyms = sortGyms(gyms);
     
     const gymsHTML = sortedGyms.map((gym, gymIndex) => {
         const eventId = `gym-${gymIndex}`;

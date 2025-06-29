@@ -177,9 +177,6 @@ h2 {
     border-bottom-color: #3b82f6;
 }
 
-.divider {
-    display: none;
-}
 
 /* Weekdays */
 .weekdays {
@@ -219,16 +216,6 @@ h2 {
     flex-shrink: 0;
 }
 
-.weekday-title::before {
-    content: attr(data-weekday);
-    font-weight: 600;
-    height: 0;
-    visibility: hidden;
-    overflow: hidden;
-    user-select: none;
-    pointer-events: none;
-    display: none;
-}
 
 .weekday-title:hover {
     background: #f9fafb;
