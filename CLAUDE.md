@@ -11,7 +11,7 @@
 - Claude can freely move, create, edit, delete files
 - All code files should be inside src/ folder, or in a subfolder inside of it
 - All config files are in config/ folder
-    - schedule.js contains all the info we need about the shifts we are showing in the UI
+    - gyms.js contains all the info we need about the gyms and shifts we are showing in the UI
 
 ## Development
 

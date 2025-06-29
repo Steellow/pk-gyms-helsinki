@@ -1,4 +1,4 @@
-export const schedule = [
+export const gyms = [
     {
         name: "Taitoliikuntakeskus",
         equipment: ["🤸 Trampliineja", "🏃 Airtrack", "🔥 Foam pit"],

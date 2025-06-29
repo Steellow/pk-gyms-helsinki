@@ -1,4 +1,4 @@
-import { schedule } from '../../config/schedule.js';
+import { gyms } from '../../config/gyms.js';
 
 function parseTime(timeStr) {
     const [hours, minutes = "00"] = timeStr.split(/[.:]/).map(str => str.padStart(2, '0'));
@@ -43,7 +43,7 @@ function displayGyms() {
     
     if (!eventsContainer) return;
     
-    const sortedGyms = [...schedule].sort((a, b) => a.name.localeCompare(b.name));
+    const sortedGyms = [...gyms].sort((a, b) => a.name.localeCompare(b.name));
     
     const gymsHTML = sortedGyms.map((gym, gymIndex) => {
         const eventId = `gym-${gymIndex}`;

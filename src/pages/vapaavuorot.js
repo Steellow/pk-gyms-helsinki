@@ -1,4 +1,4 @@
-import { schedule } from '../../config/schedule.js';
+import { gyms } from '../../config/gyms.js';
 
 function parseTime(timeStr) {
     const [hours, minutes = "00"] = timeStr.split(/[.:]/).map(str => str.padStart(2, '0'));
@@ -11,7 +11,7 @@ function formatTime(timeStr) {
 }
 
 function getEventsForWeekday(weekday) {
-    return schedule
+    return gyms
         .map(gym => ({
             name: gym.name,
             shifts: gym.shifts.filter(shift => shift.weekday === weekday)
@@ -37,7 +37,7 @@ function displayEventsForWeekday(weekday) {
         ).join('');
         
         const eventId = `event-${gymIndex}`;
-        const gymData = schedule.find(g => g.name === gym.name);
+        const gymData = gyms.find(g => g.name === gym.name);
         const equipment = gymData?.equipment;
         const mapsId = gymData?.mapsId;
         const price = gymData?.price;
