@@ -82,9 +82,9 @@ function getEventsForWeekday(weekday) {
             const aGymData = gyms.find(g => g.name === a.name);
             const bGymData = gyms.find(g => g.name === b.name);
             
-            // First sort by actualParkourGym (true comes first)
-            const aIsActualParkour = !!aGymData?.actualParkourGym;
-            const bIsActualParkour = !!bGymData?.actualParkourGym;
+            // First sort by actualParkourGym or isTelegramGroup (true comes first)
+            const aIsActualParkour = !!(aGymData?.actualParkourGym || aGymData?.isTelegramGroup);
+            const bIsActualParkour = !!(bGymData?.actualParkourGym || bGymData?.isTelegramGroup);
             
             if (aIsActualParkour !== bIsActualParkour) {
                 return aIsActualParkour ? -1 : 1;
@@ -132,8 +132,8 @@ function displayEventsForWeekday(weekday) {
         const gymData = gyms.find(g => g.name === gym.name);
         let equipment = gymData?.equipment || [];
         
-        // Add parkour equipment as first item for actual parkour gyms
-        if (gymData?.actualParkourGym) {
+        // Add parkour equipment as first item for actual parkour gyms (except Telegram groups)
+        if (gymData?.actualParkourGym && !gymData?.isTelegramGroup) {
             equipment = ['🏃 Parkour obstacles and bars', ...equipment];
         }
         const mapsId = gymData?.mapsId;
@@ -141,13 +141,14 @@ function displayEventsForWeekday(weekday) {
         const disclaimer = gymData?.disclaimer;
         const website = gymData?.website;
         const actualParkourGym = gymData?.actualParkourGym;
+        const isTelegramGroup = gymData?.isTelegramGroup;
         
         return `
             <div class="gym-event">
                 <div class="event-header" onclick="toggleEvent('${eventId}')">
                     <div class="toggle-arrow" id="arrow-${eventId}"></div>
                     <div class="event-main">
-                        <div class="gym-name ${actualParkourGym ? 'actual-parkour-gym' : ''}">${gym.name}${actualParkourGym ? ' 🔥' : ''}</div>
+                        <div class="gym-name ${(actualParkourGym || isTelegramGroup) ? 'actual-parkour-gym' : ''}">${gym.name}${(actualParkourGym || isTelegramGroup) ? ' 🔥' : ''}</div>
                         ${shiftsHTML}
                     </div>
                 </div>
@@ -155,13 +156,13 @@ function displayEventsForWeekday(weekday) {
                     <div class="event-details" id="details-${eventId}">
                         <div class="equipment">
                             <div class="price-and-maps">
-                                ${website ? `<div class="website-link"><a href="${website}" target="_blank" rel="noopener noreferrer">🌐 Website <span class="external-icon">↗</span></a></div>` : ''}
-                                ${mapsId ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank" rel="noopener noreferrer">🗺️ Google Maps <span class="external-icon">↗</span></a></div>` : ''}
+                                ${website ? `<div class="website-link"><a href="${website}" target="_blank" rel="noopener noreferrer">${isTelegramGroup ? '📱 Telegram' : '🌐 Website'} <span class="external-icon">↗</span></a></div>` : ''}
+                                ${mapsId && !isTelegramGroup ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank" rel="noopener noreferrer">🗺️ Google Maps <span class="external-icon">↗</span></a></div>` : ''}
                                 ${price ? `<div class="price-item">💰 ${price}</div>` : ''}
                             </div>
                             ${equipment ? equipment.map(item => `<div class="equipment-item">${item}</div>`).join('') : ''}
                             ${disclaimer ? `<div class="disclaimer">❗ ${disclaimer}</div>` : ''}
-                            <div class="hours-note">Check website for exceptions and most recent info about opening hours</div>
+                            ${!isTelegramGroup ? '<div class="hours-note">Check website for exceptions and most recent info about opening hours</div>' : ''}
                         </div>
                     </div>
                 ` : ''}

@@ -158,9 +158,9 @@ function displayGyms() {
     }
     
     const sortedGyms = [...gyms].sort((a, b) => {
-        // First sort by actualParkourGym (true comes first)
-        const aIsActualParkour = !!a.actualParkourGym;
-        const bIsActualParkour = !!b.actualParkourGym;
+        // First sort by actualParkourGym or isTelegramGroup (true comes first)
+        const aIsActualParkour = !!(a.actualParkourGym || a.isTelegramGroup);
+        const bIsActualParkour = !!(b.actualParkourGym || b.isTelegramGroup);
         
         if (aIsActualParkour !== bIsActualParkour) {
             return aIsActualParkour ? -1 : 1;
@@ -182,8 +182,8 @@ function displayGyms() {
         const eventId = `gym-${gymIndex}`;
         let equipment = gym.equipment || [];
         
-        // Add parkour equipment as first item for actual parkour gyms
-        if (gym.actualParkourGym) {
+        // Add parkour equipment as first item for actual parkour gyms (except Telegram groups)
+        if (gym.actualParkourGym && !gym.isTelegramGroup) {
             equipment = ['🏃 Parkour obstacles and bars', ...equipment];
         }
         const mapsId = gym.mapsId;
@@ -191,6 +191,7 @@ function displayGyms() {
         const disclaimer = gym.disclaimer;
         const website = gym.website;
         const actualParkourGym = gym.actualParkourGym;
+        const isTelegramGroup = gym.isTelegramGroup;
         
         // Group shifts by weekday, but only show shifts if gym is in season
         const shiftsToShow = isGymInSeason(gym) ? gym.shifts : null;
@@ -210,14 +211,14 @@ function displayGyms() {
                 <div class="event-header" onclick="toggleGym('${eventId}')">
                     <div class="toggle-arrow" id="arrow-${eventId}"></div>
                     <div class="event-main">
-                        <div class="gym-name ${actualParkourGym ? 'actual-parkour-gym' : ''}">${gym.name}${actualParkourGym ? ' 🔥' : ''}</div>
+                        <div class="gym-name ${(actualParkourGym || isTelegramGroup) ? 'actual-parkour-gym' : ''}">${gym.name}${(actualParkourGym || isTelegramGroup) ? ' 🔥' : ''}</div>
                     </div>
                 </div>
                 <div class="event-details" id="details-${eventId}">
                     <div class="equipment">
                         <div class="price-and-maps">
-                            ${website ? `<div class="website-link"><a href="${website}" target="_blank" rel="noopener noreferrer">🌐 Website <span class="external-icon">↗</span></a></div>` : ''}
-                            ${mapsId ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank" rel="noopener noreferrer">🗺️ Google Maps <span class="external-icon">↗</span></a></div>` : ''}
+                            ${website ? `<div class="website-link"><a href="${website}" target="_blank" rel="noopener noreferrer">${isTelegramGroup ? '📱 Telegram' : '🌐 Website'} <span class="external-icon">↗</span></a></div>` : ''}
+                            ${mapsId && !isTelegramGroup ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank" rel="noopener noreferrer">🗺️ Google Maps <span class="external-icon">↗</span></a></div>` : ''}
                             ${price ? `<div class="price-item">💰 ${price}</div>` : ''}
                         </div>
                         ${equipment ? equipment.map(item => `<div class="equipment-item">${item}</div>`).join('') : ''}
@@ -226,7 +227,7 @@ function displayGyms() {
                             <div class="shifts-section">
                                 <div class="shifts-title">Open hours:</div>
                                 ${shiftsHTML}
-                                <div class="hours-note">Check website for exceptions and most recent info about opening hours</div>
+                                ${!isTelegramGroup ? '<div class="hours-note">Check website for exceptions and most recent info about opening hours</div>' : ''}
                             </div>
                         ` : isGymInSeason(gym) ? `
                             <div class="shifts-section">

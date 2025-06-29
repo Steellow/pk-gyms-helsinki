@@ -1,5 +1,19 @@
 export const gyms = [
     {
+        name: "Monday regular jam",
+        price: "Free",
+        website: "https://t.me/parkourhelsinki",
+        mapsId: "placeholder", // Required field but not used for this item
+        disclaimer: "Not a gym, but a regular outdoor training session. Location varies so check the Telegram group for details. Beginners are welcome too!",
+        shifts: {
+            "Monday": {
+                startTime: "18",
+                endTime: "21"
+            }
+        },
+        isTelegramGroup: true
+    },
+    {
         name: "Parkourkeskus",
         mapsId: "8Q9426hWEwuuvDRT8",
         price: "7 €",
