@@ -41,6 +41,7 @@ function displayEventsForWeekday(weekday) {
         const equipment = gymData?.equipment;
         const mapsId = gymData?.mapsId;
         const price = gymData?.price;
+        const disclaimer = gymData?.disclaimer;
         
         return `
             <div class="gym-event">
@@ -51,7 +52,7 @@ function displayEventsForWeekday(weekday) {
                         ${shiftsHTML}
                     </div>
                 </div>
-                ${(equipment || mapsId || price) ? `
+                ${(equipment || mapsId || price || disclaimer) ? `
                     <div class="event-details" id="details-${eventId}">
                         <div class="equipment">
                             <div class="price-and-maps">
@@ -59,6 +60,7 @@ function displayEventsForWeekday(weekday) {
                                 ${price ? `<div class="price-item">💰 ${price}</div>` : ''}
                             </div>
                             ${equipment ? equipment.map(item => `<div class="equipment-item">${item}</div>`).join('') : ''}
+                            ${disclaimer ? `<div class="disclaimer">❗ ${disclaimer}</div>` : ''}
                         </div>
                     </div>
                 ` : ''}

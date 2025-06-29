@@ -343,6 +343,18 @@ h2 {
     font-weight: 500;
 }
 
+/* Disclaimer */
+.disclaimer {
+    color: #d97706;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: #fef3c7;
+    border-radius: 6px;
+    display: inline-block;
+}
+
 /* No events state */
 .no-events {
     color: #9ca3af;

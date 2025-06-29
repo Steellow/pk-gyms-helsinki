@@ -50,6 +50,7 @@ function displayGyms() {
         const equipment = gym.equipment;
         const mapsId = gym.mapsId;
         const price = gym.price;
+        const disclaimer = gym.disclaimer;
         
         // Group shifts by weekday
         const groupedShifts = groupShiftsByWeekday(gym.shifts);
@@ -76,6 +77,7 @@ function displayGyms() {
                             ${price ? `<div class="price-item">💰 ${price}</div>` : ''}
                         </div>
                         ${equipment ? equipment.map(item => `<div class="equipment-item">${item}</div>`).join('') : ''}
+                        ${disclaimer ? `<div class="disclaimer">❗ ${disclaimer}</div>` : ''}
                         <div class="shifts-section">
                             <div class="shifts-title">Open hours:</div>
                             ${shiftsHTML}

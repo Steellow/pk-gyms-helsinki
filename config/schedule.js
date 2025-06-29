@@ -58,6 +58,7 @@ export const schedule = [
     {
         name: "Urban Movement",
         equipment: ["🏃‍♂️ Parkour course", "📦 Vaulting boxes", "⚖️ Balance beams"],
+        disclaimer: "Test gym, not real",
         mapsId: "xyz789uvw012",
         price: "20€ / monthly",
         shifts: [
