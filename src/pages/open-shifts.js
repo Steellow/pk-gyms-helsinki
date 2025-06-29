@@ -1,55 +1,14 @@
 import { gyms } from '../../config/gyms.js';
-
-function normalizeWeekday(weekday) {
-    if (typeof weekday !== 'string') return weekday;
-    
-    const normalized = weekday.toLowerCase();
-    const weekdayMap = {
-        'monday': 'Monday',
-        'tuesday': 'Tuesday', 
-        'wednesday': 'Wednesday',
-        'thursday': 'Thursday',
-        'friday': 'Friday',
-        'saturday': 'Saturday',
-        'sunday': 'Sunday'
-    };
-    
-    return weekdayMap[normalized] || weekday;
-}
-
-function isGymInSeason(gym) {
-    const today = new Date();
-    const todayStr = today.toISOString().split('T')[0]; // yyyy-mm-dd format
-    
-    const { seasonStart, seasonEnd } = gym;
-    
-    // If no season restrictions, gym is always available
-    if (!seasonStart && !seasonEnd) {
-        return true;
-    }
-    
-    // Check season start
-    if (seasonStart && todayStr < seasonStart) {
-        return false;
-    }
-    
-    // Check season end
-    if (seasonEnd && todayStr > seasonEnd) {
-        return false;
-    }
-    
-    return true;
-}
-
-function parseTime(timeStr) {
-    const [hours, minutes = "00"] = timeStr.split(/[.:]/).map(str => str.padStart(2, '0'));
-    return parseInt(hours) * 60 + parseInt(minutes);
-}
-
-function formatTime(timeStr) {
-    const [hours, minutes = "00"] = timeStr.split(/[.:]/).map(str => str.padStart(2, '0'));
-    return `${hours}.${minutes}`;
-}
+import { 
+    normalizeWeekday, 
+    isGymInSeason, 
+    parseTime, 
+    formatTime, 
+    processEquipment,
+    sortGyms,
+    generateLinksHTML,
+    createToggleHandler
+} from '../utils/gym-utils.js';
 
 function getEventsForWeekday(weekday) {
     try {
@@ -78,34 +37,43 @@ function getEventsForWeekday(weekday) {
                 }
             })
             .filter(gym => gym && gym.shifts.length > 0)
-        .sort((a, b) => {
-            const aGymData = gyms.find(g => g.name === a.name);
-            const bGymData = gyms.find(g => g.name === b.name);
-            
-            // First sort by actualParkourGym or isTelegramGroup (true comes first)
-            const aIsActualParkour = !!(aGymData?.actualParkourGym || aGymData?.isTelegramGroup);
-            const bIsActualParkour = !!(bGymData?.actualParkourGym || bGymData?.isTelegramGroup);
-            
-            if (aIsActualParkour !== bIsActualParkour) {
-                return aIsActualParkour ? -1 : 1;
-            }
-            
-            // Then sort by disclaimer presence (no disclaimer comes first)
-            const aHasDisclaimer = !!a.disclaimer;
-            const bHasDisclaimer = !!b.disclaimer;
-            
-            if (aHasDisclaimer !== bHasDisclaimer) {
-                return aHasDisclaimer ? 1 : -1;
-            }
-            
-            // Finally sort by opening time
-            try {
-                return parseTime(a.shifts[0].startTime) - parseTime(b.shifts[0].startTime);
-            } catch (error) {
-                console.error(`Error parsing start time for gym "${a.name}" or "${b.name}":`, error);
-                return 0;
-            }
-        });
+            .map(gym => {
+                // Add gym data for sorting, but preserve the filtered shifts
+                const gymData = gyms.find(g => g.name === gym.name);
+                return { ...gymData, ...gym }; // gym data overwrites gymData to keep filtered shifts
+            })
+            .sort((a, b) => {
+                // First sort by actualParkourGym or isTelegramGroup (true comes first)
+                const aIsActualParkour = !!(a.actualParkourGym || a.isTelegramGroup);
+                const bIsActualParkour = !!(b.actualParkourGym || b.isTelegramGroup);
+                
+                if (aIsActualParkour !== bIsActualParkour) {
+                    return aIsActualParkour ? -1 : 1;
+                }
+                
+                // Then sort by disclaimer presence (no disclaimer comes first)
+                const aHasDisclaimer = !!a.disclaimer;
+                const bHasDisclaimer = !!b.disclaimer;
+                
+                if (aHasDisclaimer !== bHasDisclaimer) {
+                    return aHasDisclaimer ? 1 : -1;
+                }
+                
+                // Finally sort by opening time
+                try {
+                    const aFirstShift = a.shifts && a.shifts[0];
+                    const bFirstShift = b.shifts && b.shifts[0];
+                    
+                    if (!aFirstShift || !bFirstShift) {
+                        return 0; // Keep original order if no shifts available
+                    }
+                    
+                    return parseTime(aFirstShift.startTime) - parseTime(bFirstShift.startTime);
+                } catch (error) {
+                    console.error(`Error parsing start time for gym "${a.name}" or "${b.name}":`, error);
+                    return 0;
+                }
+            });
     } catch (error) {
         console.error('Error in getEventsForWeekday:', error);
         return [];
@@ -130,18 +98,8 @@ function displayEventsForWeekday(weekday) {
         
         const eventId = `event-${gymIndex}`;
         const gymData = gyms.find(g => g.name === gym.name);
-        let equipment = gymData?.equipment || [];
-        
-        // Add parkour equipment as first item for actual parkour gyms (except Telegram groups)
-        if (gymData?.actualParkourGym && !gymData?.isTelegramGroup) {
-            equipment = ['🏃 Parkour obstacles and bars', ...equipment];
-        }
-        const mapsId = gymData?.mapsId;
-        const price = gymData?.price;
-        const disclaimer = gymData?.disclaimer;
-        const website = gymData?.website;
-        const actualParkourGym = gymData?.actualParkourGym;
-        const isTelegramGroup = gymData?.isTelegramGroup;
+        const equipment = processEquipment(gymData);
+        const { mapsId, price, disclaimer, website, actualParkourGym, isTelegramGroup } = gymData || {};
         
         return `
             <div class="gym-event">
@@ -152,15 +110,11 @@ function displayEventsForWeekday(weekday) {
                         ${shiftsHTML}
                     </div>
                 </div>
-                ${(equipment || mapsId || price || disclaimer || website) ? `
+                ${(equipment.length > 0 || mapsId || price || disclaimer || website) ? `
                     <div class="event-details" id="details-${eventId}">
                         <div class="equipment">
-                            <div class="price-and-maps">
-                                ${website ? `<div class="website-link"><a href="${website}" target="_blank" rel="noopener noreferrer">${isTelegramGroup ? '📱 Telegram' : '🌐 Website'} <span class="external-icon">↗</span></a></div>` : ''}
-                                ${mapsId && !isTelegramGroup ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank" rel="noopener noreferrer">🗺️ Google Maps <span class="external-icon">↗</span></a></div>` : ''}
-                                ${price ? `<div class="price-item">💰 ${price}</div>` : ''}
-                            </div>
-                            ${equipment ? equipment.map(item => `<div class="equipment-item">${item}</div>`).join('') : ''}
+                            ${generateLinksHTML(gymData)}
+                            ${equipment.map(item => `<div class="equipment-item">${item}</div>`).join('')}
                             ${disclaimer ? `<div class="disclaimer">❗ ${disclaimer}</div>` : ''}
                             ${!isTelegramGroup ? '<div class="hours-note">Check website for exceptions and most recent info about opening hours</div>' : ''}
                         </div>
@@ -173,22 +127,7 @@ function displayEventsForWeekday(weekday) {
     eventsContainer.innerHTML = eventsHTML;
 }
 
-window.toggleEvent = function(eventId) {
-    const arrow = document.getElementById(`arrow-${eventId}`);
-    const details = document.getElementById(`details-${eventId}`);
-    
-    if (!details) return; // No equipment to show
-    
-    const isExpanded = details.classList.contains('expanded');
-    
-    if (isExpanded) {
-        arrow.classList.remove('expanded');
-        details.classList.remove('expanded');
-    } else {
-        arrow.classList.add('expanded');
-        details.classList.add('expanded');
-    }
-}
+window.toggleEvent = createToggleHandler();
 
 function setActiveWeekday(selectedWeekday) {
     document.querySelectorAll('.weekday-title').forEach(title => {

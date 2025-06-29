@@ -81,7 +81,7 @@ export const gyms = [
         seasonEnd: "2025-12-14",
         equipment: ["Acrobatics area with small trampoline & mattresses", "Small airtrack"],
         shifts: {
-            "sunday": {
+            "Sunday": {
                 startTime: "18",
                 endTime: "19.30"
             }
