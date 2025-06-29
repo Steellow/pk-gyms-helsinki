@@ -9,8 +9,9 @@
         const currentPath = window.location.pathname;
         const pathSegments = currentPath.split('/').filter(segment => segment);
         
-        // For GitHub Pages, assume first segment is the repo name
-        if (pathSegments.length > 0 && window.location.hostname.includes('github.io')) {
+        // Check if this is GitHub Pages (either github.io or custom domain with known repo)
+        if (pathSegments.length > 0 && 
+            (window.location.hostname.includes('github.io') || pathSegments[0] === 'pk-gyms-helsinki')) {
             const repoName = pathSegments[0];
             const routePath = '/' + pathSegments.slice(1).join('/');
             const basePath = '/' + repoName;
@@ -19,7 +20,7 @@
             const redirectUrl = basePath + '/?p=' + encodeURIComponent(routePath);
             window.location.replace(redirectUrl);
         } else {
-            // For other hosting (custom domain), redirect to root
+            // For other hosting (custom domain at root), redirect to root
             const routePath = currentPath;
             const redirectUrl = '/?p=' + encodeURIComponent(routePath);
             window.location.replace(redirectUrl);

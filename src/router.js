@@ -20,11 +20,17 @@ class Router {
         
         // For GitHub Pages: extract repo name from pathname
         const pathSegments = window.location.pathname.split('/').filter(segment => segment);
-        if (pathSegments.length > 0 && window.location.hostname.includes('github.io')) {
-            return '/' + pathSegments[0];
+        
+        // Check if this is GitHub Pages (either github.io or custom domain with repo path)
+        if (pathSegments.length > 0) {
+            // For github.io domains or custom domains serving from a repo subdirectory
+            if (window.location.hostname.includes('github.io') || 
+                (pathSegments.length > 0 && pathSegments[0] === 'pk-gyms-helsinki')) {
+                return '/' + pathSegments[0];
+            }
         }
         
-        // For custom domains or other hosting
+        // For custom domains at root or other hosting
         return '';
     }
     
