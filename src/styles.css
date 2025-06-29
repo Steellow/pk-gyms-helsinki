@@ -186,6 +186,7 @@ h2 {
     margin-top: 16px;
     flex-wrap: nowrap;
     overflow-x: auto;
+    padding: 2px 0; /* Add padding to prevent clipping when buttons move up */
 }
 
 .weekdays::-webkit-scrollbar {
