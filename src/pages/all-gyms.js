@@ -29,8 +29,8 @@ function validateGymData(gym, index) {
         errors.push(`Gym "${gym.name || `at index ${index}`}": 'website' is required and must be a string`);
     }
     
-    if (gym.mapsId && typeof gym.mapsId !== 'string') {
-        errors.push(`Gym "${gym.name || `at index ${index}`}": 'mapsId' must be a string if provided`);
+    if (!gym.mapsId || typeof gym.mapsId !== 'string') {
+        errors.push(`Gym "${gym.name || `at index ${index}`}": 'mapsId' is required and must be a string`);
     }
     
     if (gym.shifts && !Array.isArray(gym.shifts)) {
