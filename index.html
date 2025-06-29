@@ -17,10 +17,27 @@
         <p class="subtitle">Parkour gyms and other indoor training spots in Helsinki area. Shows open shift timetables for each day.</p>
         
         <nav class="navigation">
-            <a class="nav-link" data-path="/" onclick="navigateTo('/')">Open gym times</a>
-            <a class="nav-link" data-path="/gyms" onclick="navigateTo('/gyms')">All gyms</a>
-            <a class="nav-link" href="https://goo.gl/maps/Ugc3LXe1AywJU9wz7" target="_blank" rel="noopener noreferrer">Outdoor spots <span class="external-icon">↗</span></a>
-            <a class="nav-link" data-path="/contact" onclick="navigateTo('/contact')">Contact me</a>
+            <!-- Desktop tabs -->
+            <div class="nav-tabs">
+                <a class="nav-link" data-path="/" onclick="navigateTo('/')">Open gym times</a>
+                <a class="nav-link" data-path="/gyms" onclick="navigateTo('/gyms')">All gyms</a>
+                <a class="nav-link" href="https://goo.gl/maps/Ugc3LXe1AywJU9wz7" target="_blank" rel="noopener noreferrer">Outdoor spots <span class="external-icon">↗</span></a>
+                <a class="nav-link" data-path="/contact" onclick="navigateTo('/contact')">Contact me</a>
+            </div>
+            
+            <!-- Mobile dropdown -->
+            <div class="nav-dropdown">
+                <button class="dropdown-button" onclick="toggleNavDropdown()">
+                    <span class="dropdown-text">Open gym times</span>
+                    <span class="dropdown-arrow">▼</span>
+                </button>
+                <div class="dropdown-menu" id="nav-dropdown-menu">
+                    <a class="dropdown-item" data-path="/" onclick="navigateTo('/'); closeNavDropdown();">Open gym times</a>
+                    <a class="dropdown-item" data-path="/gyms" onclick="navigateTo('/gyms'); closeNavDropdown();">All gyms</a>
+                    <a class="dropdown-item" href="https://goo.gl/maps/Ugc3LXe1AywJU9wz7" target="_blank" rel="noopener noreferrer" onclick="closeNavDropdown();">Outdoor spots <span class="external-icon">↗</span></a>
+                    <a class="dropdown-item" data-path="/contact" onclick="navigateTo('/contact'); closeNavDropdown();">Contact me</a>
+                </div>
+            </div>
         </nav>
         
         <div class="divider"></div>

@@ -29,13 +29,8 @@ class Router {
         }
         
         // Update navigation active state
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-        });
-        
-        const activeLink = document.querySelector(`[data-path="${path}"]`);
-        if (activeLink) {
-            activeLink.classList.add('active');
+        if (window.updateActiveNavigation) {
+            window.updateActiveNavigation(path);
         }
     }
     
