@@ -7,18 +7,8 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤸🏼</text></svg>">
     <link rel="stylesheet" href="src/styles.css">
     
-    <!-- Cloudflare Web Analytics (only loads in production) -->
-    <script>
-        // Only load analytics when not running locally
-        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-            const script = document.createElement('script');
-            script.defer = true;
-            script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-            script.setAttribute('data-cf-beacon', '{"token": "5271fecc931b4f78b4c2fe931bd12584"}');
-            script.crossOrigin = 'anonymous';
-            document.head.appendChild(script);
-        }
-    </script>
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5271fecc931b4f78b4c2fe931bd12584"}' onerror="console.warn('Cloudflare Analytics could not load')"></script>
     <!-- End Cloudflare Web Analytics -->
 </head>
 <body>
