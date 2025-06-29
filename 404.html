@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        // GitHub Pages SPA fallback
+        // This script detects the base path and redirects to the correct route
+        
+        const currentPath = window.location.pathname;
+        const pathSegments = currentPath.split('/').filter(segment => segment);
+        
+        // For GitHub Pages, assume first segment is the repo name
+        if (pathSegments.length > 0 && window.location.hostname.includes('github.io')) {
+            const repoName = pathSegments[0];
+            const routePath = '/' + pathSegments.slice(1).join('/');
+            const basePath = '/' + repoName;
+            
+            // Redirect to index.html with the route information in the URL fragment
+            const redirectUrl = basePath + '/?p=' + encodeURIComponent(routePath);
+            window.location.replace(redirectUrl);
+        } else {
+            // For other hosting (custom domain), redirect to root
+            const routePath = currentPath;
+            const redirectUrl = '/?p=' + encodeURIComponent(routePath);
+            window.location.replace(redirectUrl);
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>

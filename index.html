@@ -43,6 +43,20 @@
         <div id="page-content"></div>
     </div>
     
+    <script>
+        // Handle GitHub Pages SPA redirect
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectPath = urlParams.get('p');
+            if (redirectPath) {
+                // Remove the redirect parameter and navigate to the intended route
+                const newUrl = window.location.origin + window.location.pathname;
+                window.history.replaceState({}, '', newUrl);
+                // Store the intended path for the router to pick up
+                window._githubPagesRedirect = redirectPath;
+            }
+        })();
+    </script>
     <script type="module" src="src/app.js"></script>
 </body>
 </html>

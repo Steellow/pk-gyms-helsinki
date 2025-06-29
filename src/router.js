@@ -3,10 +3,42 @@ class Router {
         this.routes = {};
         this.currentPath = '/';
         
+        // Detect base path for GitHub Pages
+        this.basePath = this.getBasePath();
+        
         // Listen for browser back/forward
         window.addEventListener('popstate', () => {
             this.handleRoute(window.location.pathname);
         });
+    }
+    
+    getBasePath() {
+        // For local development
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            return '';
+        }
+        
+        // For GitHub Pages: extract repo name from pathname
+        const pathSegments = window.location.pathname.split('/').filter(segment => segment);
+        if (pathSegments.length > 0 && window.location.hostname.includes('github.io')) {
+            return '/' + pathSegments[0];
+        }
+        
+        // For custom domains or other hosting
+        return '';
+    }
+    
+    getRelativePath(fullPath) {
+        // Remove base path from full path to get relative path
+        if (this.basePath && fullPath.startsWith(this.basePath)) {
+            return fullPath.substring(this.basePath.length) || '/';
+        }
+        return fullPath;
+    }
+    
+    getFullPath(relativePath) {
+        // Add base path to relative path to get full path
+        return this.basePath + relativePath;
     }
     
     addRoute(path, handler) {
@@ -14,30 +46,41 @@ class Router {
     }
     
     navigate(path) {
-        if (path !== this.currentPath) {
-            this.currentPath = path;
-            window.history.pushState({}, '', path);
-            this.handleRoute(path);
+        const relativePath = this.getRelativePath(path);
+        if (relativePath !== this.currentPath) {
+            this.currentPath = relativePath;
+            const fullPath = this.getFullPath(relativePath);
+            window.history.pushState({}, '', fullPath);
+            this.handleRoute(relativePath);
         }
     }
     
-    handleRoute(path) {
-        this.currentPath = path;
-        const handler = this.routes[path] || this.routes['/'];
+    handleRoute(fullPath) {
+        const relativePath = this.getRelativePath(fullPath);
+        this.currentPath = relativePath;
+        const handler = this.routes[relativePath] || this.routes['/'];
         if (handler) {
             handler();
         }
         
         // Update navigation active state
         if (window.updateActiveNavigation) {
-            window.updateActiveNavigation(path);
+            window.updateActiveNavigation(relativePath);
         }
     }
     
     init() {
+        // Handle GitHub Pages redirect first
+        if (window._githubPagesRedirect) {
+            const redirectPath = window._githubPagesRedirect;
+            delete window._githubPagesRedirect;
+            this.navigate(redirectPath);
+            return;
+        }
+        
         // Handle initial page load
-        const path = window.location.pathname;
-        this.handleRoute(path);
+        const fullPath = window.location.pathname;
+        this.handleRoute(fullPath);
     }
 }
 
