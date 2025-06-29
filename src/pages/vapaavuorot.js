@@ -14,10 +14,22 @@ function getEventsForWeekday(weekday) {
     return gyms
         .map(gym => ({
             name: gym.name,
-            shifts: gym.shifts.filter(shift => shift.weekday === weekday)
+            shifts: gym.shifts.filter(shift => shift.weekday === weekday),
+            disclaimer: gym.disclaimer
         }))
         .filter(gym => gym.shifts.length > 0)
-        .sort((a, b) => parseTime(a.shifts[0].startTime) - parseTime(b.shifts[0].startTime));
+        .sort((a, b) => {
+            // First sort by disclaimer presence (no disclaimer comes first)
+            const aHasDisclaimer = !!a.disclaimer;
+            const bHasDisclaimer = !!b.disclaimer;
+            
+            if (aHasDisclaimer !== bHasDisclaimer) {
+                return aHasDisclaimer ? 1 : -1;
+            }
+            
+            // Then sort by opening time
+            return parseTime(a.shifts[0].startTime) - parseTime(b.shifts[0].startTime);
+        });
 }
 
 function displayEventsForWeekday(weekday) {

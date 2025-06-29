@@ -43,7 +43,18 @@ function displayGyms() {
     
     if (!eventsContainer) return;
     
-    const sortedGyms = [...gyms].sort((a, b) => a.name.localeCompare(b.name));
+    const sortedGyms = [...gyms].sort((a, b) => {
+        // First sort by disclaimer presence (no disclaimer comes first)
+        const aHasDisclaimer = !!a.disclaimer;
+        const bHasDisclaimer = !!b.disclaimer;
+        
+        if (aHasDisclaimer !== bHasDisclaimer) {
+            return aHasDisclaimer ? 1 : -1;
+        }
+        
+        // Then sort alphabetically
+        return a.name.localeCompare(b.name);
+    });
     
     const gymsHTML = sortedGyms.map((gym, gymIndex) => {
         const eventId = `gym-${gymIndex}`;
