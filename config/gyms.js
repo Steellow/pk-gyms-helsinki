@@ -1,11 +1,12 @@
 export const gyms = [
-        {
+    {
         name: "Parkourkeskus",
         mapsId: "8Q9426hWEwuuvDRT8",
         price: "7 €",
         website: "https://parkourkeskus.fi/vapaavuorot",
         disclaimer: "Has some open shifts, but are inconsistent. Check website for latest shifts."
     },
+
     {
         name: "Taitoliikuntakeskus",
         equipment: ["🤸 Trampliineja", "🏃 Airtrack", "🔥 Foam pit"],
@@ -65,34 +66,47 @@ export const gyms = [
         ]
     },
     {
-        name: "Urban Movement",
-        equipment: ["🏃‍♂️ Parkour course", "📦 Vaulting boxes", "⚖️ Balance beams"],
-        disclaimer: "Test gym, not real",
-        mapsId: "xyz789uvw012",
-        website: "hanki.dev",
-        price: "20€ / monthly",
-        seasonEnd: "2025-12-31",
+        name: "OCR Factory",
+        mapsId: "7KZ37LcBzB7SH33d9",
+        disclaimer: "Not exactly a parkour gym, but has some Ninja Warrior -style stuff",
+        price: "19 €",
+        website: "https://ocrfactory.fi/fi-fi/article/etusivu/yhteystiedot/9/",
         shifts: [
             {
+                weekday: "Monday",
+                startTime: "05",
+                endTime: "23"
+            },
+            {
                 weekday: "Tuesday",
-                startTime: "08",
-                endTime: "12"
+                startTime: "05",
+                endTime: "23"
+            },
+            {
+                weekday: "Wednesday",
+                startTime: "05",
+                endTime: "23"
             },
             {
                 weekday: "Thursday",
-                startTime: "15",
-                endTime: "21"
+                startTime: "05",
+                endTime: "23"
             },
             {
-                weekday: "Saturday",
-                startTime: "11",
-                endTime: "16"
+                weekday: "Friday",
+                startTime: "05",
+                endTime: "23"
+            },
+            {
+                weekday: "Saturdayy",
+                startTime: "05",
+                endTime: "23"
             },
             {
                 weekday: "Sunday",
-                startTime: "13",
-                endTime: "18"
-            }
+                startTime: "05",
+                endTime: "23"
+            },
         ]
-    }
+    },
 ];
