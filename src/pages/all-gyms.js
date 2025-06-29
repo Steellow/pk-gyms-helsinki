@@ -159,8 +159,7 @@ function displayGyms() {
         console.error('Fix the above gym data errors in config/gyms.js');
     }
     
-    const inSeasonGyms = gyms.filter(isGymInSeason);
-    const sortedGyms = [...inSeasonGyms].sort((a, b) => {
+    const sortedGyms = [...gyms].sort((a, b) => {
         // First sort by actualParkourGym (true comes first)
         const aIsActualParkour = !!a.actualParkourGym;
         const bIsActualParkour = !!b.actualParkourGym;
@@ -195,8 +194,9 @@ function displayGyms() {
         const website = gym.website;
         const actualParkourGym = gym.actualParkourGym;
         
-        // Group shifts by weekday
-        const groupedShifts = groupShiftsByWeekday(gym.shifts);
+        // Group shifts by weekday, but only show shifts if gym is in season
+        const shiftsToShow = isGymInSeason(gym) ? gym.shifts : null;
+        const groupedShifts = groupShiftsByWeekday(shiftsToShow);
         const shiftsHTML = Object.entries(groupedShifts)
             .map(([weekday, shifts]) => {
                 const dayShifts = shifts.map(shift => 
@@ -205,7 +205,7 @@ function displayGyms() {
                 return `<div class="weekday-shifts"><strong>${weekday}:</strong> ${dayShifts}</div>`;
             }).join('');
         
-        const hasShifts = gym.shifts && Array.isArray(gym.shifts) && gym.shifts.length > 0;
+        const hasShifts = shiftsToShow && Array.isArray(shiftsToShow) && shiftsToShow.length > 0;
         
         return `
             <div class="gym-event">
@@ -230,9 +230,13 @@ function displayGyms() {
                                 ${shiftsHTML}
                                 <div class="hours-note">Check website for exceptions and most recent info about opening hours</div>
                             </div>
-                        ` : `
+                        ` : isGymInSeason(gym) ? `
                             <div class="shifts-section">
                                 <div class="no-shifts">No regular open hours available. Check website for current information.</div>
+                            </div>
+                        ` : `
+                            <div class="shifts-section">
+                                <div class="no-shifts">Currently no open shifts. Check website for details.</div>
                             </div>
                         `}
                     </div>

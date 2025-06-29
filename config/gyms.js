@@ -32,7 +32,7 @@ export const gyms = [
                 endTime: "16"
             },
             {
-                weekday: "Thrusday",
+                weekday: "thrusday",
                 startTime: "10",
                 endTime: "16"
             },
