@@ -20,7 +20,7 @@
 Gym data in `config/gyms.js` follows this structure:
 - `name` (required): String - Gym name
 - `website` (required): String - Full URL to gym website (shows with 🌐 emoji)
-- `mapsId` (required): String - Google Maps share ID for location links
+- `mapsId` (optional): String - Google Maps share ID for location links
 - `equipment` (optional): Array of strings with emojis - Available equipment
 - `price` (optional): String - Pricing information 
 - `disclaimer` (optional): String - Warning/disclaimer text (shows with ❗ emoji)
