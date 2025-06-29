@@ -44,6 +44,27 @@ export const gyms = [
         ]
     },
     {
+        name: "Parkour Akatemia Vallila",
+        mapsId: "p8VU23eob1FjNhFJ9",
+        website: "https://parkourakatemia.fi/vallila/english/",
+        price: "5 €",
+        seasonStart: "2025-08-18",
+        seasonEnd: "2025-12-14",
+        actualParkourGym: true,
+        shifts: [
+            {
+                weekday: "saturday",
+                startTime: "18",
+                endTime: "20"
+            },
+            {
+                weekday: "sunday",
+                startTime: "18.15",
+                endTime: "20.15"
+            }
+        ]
+    },
+    {
         name: "Voimisteluseura Helsinki",
         equipment: ["Some soft obstacles for parkour", "Trampolines", "Airtrack"],
         mapsId: "ouLsNbZzWnL4RBYZ9",
@@ -61,31 +82,36 @@ export const gyms = [
     },
     {
         name: "Calisthenics Lab",
-        equipment: ["💪 Pull-up bars", "🤲 Parallettes", "💍 Rings"],
-        mapsId: "dPQnoi2VU5wx548X7",
-        price: "12€ / day pass",
-        seasonStart: "2025-09-01",
-        seasonEnd: "2026-05-31",
+        equipment: ["Trampoline", "Foam pit with a bar"],
+        mapsId: "e88xE1UH8689B7Z28",
+        price: "1h: 9 € / 2h: 15 €",
+        website: "https://www.calisthenicslab.fi/en/",
+        seasonEnd: "2025-08-31",
         shifts: [
             {
                 weekday: "Monday",
                 startTime: "10",
-                endTime: "14"
+                endTime: "12.25"
+            },
+            {
+                weekday: "Tuesday",
+                startTime: "10",
+                endTime: "13.40"
             },
             {
                 weekday: "Wednesday",
-                startTime: "16",
-                endTime: "19"
-            },
-            {
-                weekday: "Thursday",
                 startTime: "10",
-                endTime: "13"
+                endTime: "13.4"
             },
             {
                 weekday: "Saturday",
-                startTime: "09",
-                endTime: "17"
+                startTime: "17.30",
+                endTime: "20"
+            },
+            {
+                weekday: "Sunday",
+                startTime: "17.30",
+                endTime: "20"
             }
         ]
     },
