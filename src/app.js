@@ -1,6 +1,6 @@
 import { router } from './router.js';
-import { renderVapaavuorotPage } from './pages/vapaavuorot.js';
-import { renderGymsPage } from './pages/gyms.js';
+import { renderOpenShiftsPage } from './pages/open-shifts.js';
+import { renderGymsPage } from './pages/all-gyms.js';
 import { renderContactPage } from './pages/contact.js';
 
 // Global navigation function
@@ -9,7 +9,7 @@ window.navigateTo = function(path) {
 };
 
 // Set up routes
-router.addRoute('/', renderVapaavuorotPage);
+router.addRoute('/', renderOpenShiftsPage);
 router.addRoute('/gyms', renderGymsPage);
 router.addRoute('/contact', renderContactPage);
 

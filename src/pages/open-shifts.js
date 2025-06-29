@@ -312,7 +312,7 @@ function setupSwipeGestures() {
     }, { passive: true });
 }
 
-export function renderVapaavuorotPage() {
+export function renderOpenShiftsPage() {
     const pageContent = document.getElementById('page-content');
     
     pageContent.innerHTML = `

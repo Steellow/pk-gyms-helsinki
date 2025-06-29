@@ -9,7 +9,7 @@ export const gyms = [
 
     {
         name: "Taitoliikuntakeskus",
-        equipment: ["🤸 Trampliineja", "🏃 Airtrack", "🔥 Foam pit"],
+        equipment: ["🤸 Trampolines", "🏃 Airtrack", "🔥 Foam pit"],
         mapsId: "dPQnoi2VU5wx548X7",
         price: "15€ / session",
         shifts: [
