@@ -40,12 +40,15 @@ Gym data is stored in `config/gyms.js`. Each gym object has the following struct
     actualParkourGym: true,             // Optional: Boolean, shows gym with bold text + 🔥 emoji and sorts first
     seasonStart: "2024-09-01",          // Optional: Season start date (yyyy-mm-dd)
     seasonEnd: "2025-05-31",            // Optional: Season end date (yyyy-mm-dd)
-    shifts: [                           // Optional: Array of time slots
-        {
-            weekday: "Monday",          // Required: Full weekday name
+    shifts: {                           // Optional: Object with weekday keys and time slot values
+        "Monday": {
             startTime: "10.30",         // Required: 24h format, dot or colon separator
             endTime: "16"               // Required: 24h format, dot or colon separator
+        },
+        "Friday": {
+            startTime: "14",
+            endTime: "20"
         }
-    ]
+    }
 }
 ```

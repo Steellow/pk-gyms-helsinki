@@ -27,10 +27,11 @@ Gym data in `config/gyms.js` follows this structure:
 - `actualParkourGym` (optional): Boolean - If true, shows gym name in bold with 🔥 emoji and sorts first
 - `seasonStart` (optional): String - Season start date in yyyy-mm-dd format
 - `seasonEnd` (optional): String - Season end date in yyyy-mm-dd format
-- `shifts` (optional): Array of time slot objects:
-  - `weekday` (required): String - Full weekday name (Monday, Tuesday, etc.)
-  - `startTime` (required): String - 24h format with dot or colon (e.g. "10.30", "16:00")
-  - `endTime` (required): String - 24h format with dot or colon
+- `shifts` (optional): Object with weekday keys and time slot values:
+  - Key: String - Full weekday name (Monday, Tuesday, etc.)
+  - Value: Object with `startTime` and `endTime` fields
+    - `startTime` (required): String - 24h format with dot or colon (e.g. "10.30", "16:00")
+    - `endTime` (required): String - 24h format with dot or colon
 
 Season logic: Gyms only show if current date is within season. No season fields = always show. Only one field = open-ended season.
 

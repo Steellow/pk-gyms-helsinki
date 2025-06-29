@@ -33,28 +33,25 @@ function validateGymData(gym, index) {
         errors.push(`Gym "${gym.name || `at index ${index}`}": 'mapsId' is required and must be a string`);
     }
     
-    if (gym.shifts && !Array.isArray(gym.shifts)) {
-        errors.push(`Gym "${gym.name || `at index ${index}`}": 'shifts' must be an array if provided`);
+    if (gym.shifts && (typeof gym.shifts !== 'object' || Array.isArray(gym.shifts))) {
+        errors.push(`Gym "${gym.name || `at index ${index}`}": 'shifts' must be an object if provided`);
     }
     
-    if (gym.shifts && Array.isArray(gym.shifts)) {
-        gym.shifts.forEach((shift, shiftIndex) => {
-            if (!shift.weekday || typeof shift.weekday !== 'string') {
-                errors.push(`Gym "${gym.name}": shift ${shiftIndex} missing or invalid 'weekday'`);
-            } else {
-                const normalizedWeekday = normalizeWeekday(shift.weekday);
-                if (!validWeekdays.includes(normalizedWeekday)) {
-                    errors.push(`Gym "${gym.name}": shift ${shiftIndex} has invalid weekday "${shift.weekday}". Valid options: ${validWeekdays.join(', ')}`);
-                } else {
-                    // Normalize the weekday in place
-                    shift.weekday = normalizedWeekday;
-                }
+    if (gym.shifts && typeof gym.shifts === 'object' && !Array.isArray(gym.shifts)) {
+        Object.entries(gym.shifts).forEach(([weekday, shift]) => {
+            const normalizedWeekday = normalizeWeekday(weekday);
+            if (!validWeekdays.includes(normalizedWeekday)) {
+                errors.push(`Gym "${gym.name}": invalid weekday key "${weekday}". Valid options: ${validWeekdays.join(', ')}`);
+            }
+            if (!shift || typeof shift !== 'object') {
+                errors.push(`Gym "${gym.name}": shift for "${weekday}" must be an object`);
+                return;
             }
             if (!shift.startTime || typeof shift.startTime !== 'string') {
-                errors.push(`Gym "${gym.name}": shift ${shiftIndex} missing or invalid 'startTime'`);
+                errors.push(`Gym "${gym.name}": shift for "${weekday}" missing or invalid 'startTime'`);
             }
             if (!shift.endTime || typeof shift.endTime !== 'string') {
-                errors.push(`Gym "${gym.name}": shift ${shiftIndex} missing or invalid 'endTime'`);
+                errors.push(`Gym "${gym.name}": shift for "${weekday}" missing or invalid 'endTime'`);
             }
         });
     }
@@ -102,21 +99,22 @@ function formatTime(timeStr) {
 
 // Group shifts by weekday for display
 function groupShiftsByWeekday(shifts) {
-    if (!shifts || !Array.isArray(shifts)) {
+    if (!shifts || typeof shifts !== 'object') {
         return {};
     }
     
     const grouped = {};
     const weekdayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     
-    shifts.forEach(shift => {
+    Object.entries(shifts).forEach(([weekday, shift]) => {
         try {
-            if (!grouped[shift.weekday]) {
-                grouped[shift.weekday] = [];
+            const normalizedWeekday = normalizeWeekday(weekday);
+            if (!grouped[normalizedWeekday]) {
+                grouped[normalizedWeekday] = [];
             }
-            grouped[shift.weekday].push(shift);
+            grouped[normalizedWeekday].push(shift);
         } catch (error) {
-            console.error(`Error processing shift:`, shift, error);
+            console.error(`Error processing shift for ${weekday}:`, shift, error);
         }
     });
     
@@ -205,7 +203,7 @@ function displayGyms() {
                 return `<div class="weekday-shifts"><strong>${weekday}:</strong> ${dayShifts}</div>`;
             }).join('');
         
-        const hasShifts = shiftsToShow && Array.isArray(shiftsToShow) && shiftsToShow.length > 0;
+        const hasShifts = shiftsToShow && typeof shiftsToShow === 'object' && Object.keys(shiftsToShow).length > 0;
         
         return `
             <div class="gym-event">

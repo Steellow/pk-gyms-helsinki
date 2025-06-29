@@ -15,33 +15,28 @@ export const gyms = [
         website: "https://taitoliikuntakeskus.fi/pages/aukioloajat",
         actualParkourGym: true,
         seasonEnd: "2025-07-04",
-        shifts: [
-            {
-                weekday: "Monday",
+        shifts: {
+            "Monday": {
                 startTime: "10",
                 endTime: "16"
             },
-            {
-                weekday: "Tuesday",
+            "Tuesday": {
                 startTime: "10",
                 endTime: "16"
             },
-            {
-                weekday: "Wednesday",
+            "Wednesday": {
                 startTime: "10",
                 endTime: "16"
             },
-            {
-                weekday: "thrusday",
+            "Thursday": {
                 startTime: "10",
                 endTime: "16"
             },
-            {
-                weekday: "Friday",
+            "Friday": {
                 startTime: "10",
                 endTime: "16"
             }
-        ]
+        }
     },
     {
         name: "Parkour Akatemia Vallila",
@@ -51,18 +46,16 @@ export const gyms = [
         seasonStart: "2025-08-18",
         seasonEnd: "2025-12-14",
         actualParkourGym: true,
-        shifts: [
-            {
-                weekday: "saturday",
+        shifts: {
+            "Saturday": {
                 startTime: "18",
                 endTime: "20"
             },
-            {
-                weekday: "sunday",
+            "Sunday": {
                 startTime: "18.15",
                 endTime: "20.15"
             }
-        ]
+        }
     },
     {
         name: "Voimisteluseura Helsinki",
@@ -72,13 +65,12 @@ export const gyms = [
         price: "10 €",
         seasonStart: "2025-08-18",
         seasonEnd: "2025-12-14",
-        shifts: [
-            {
-                weekday: "Saturday",
+        shifts: {
+            "Saturday": {
                 startTime: "14",
                 endTime: "17"
             }
-        ]
+        }
     },
     {
         name: "Calisthenics Lab",
@@ -87,33 +79,28 @@ export const gyms = [
         price: "1h: 9 € / 2h: 15 €",
         website: "https://www.calisthenicslab.fi/en/",
         seasonEnd: "2025-08-31",
-        shifts: [
-            {
-                weekday: "Monday",
+        shifts: {
+            "Monday": {
                 startTime: "10",
                 endTime: "12.25"
             },
-            {
-                weekday: "Tuesday",
+            "Tuesday": {
                 startTime: "10",
                 endTime: "13.40"
             },
-            {
-                weekday: "Wednesday",
+            "Wednesday": {
                 startTime: "10",
                 endTime: "13.4"
             },
-            {
-                weekday: "Saturday",
+            "Saturday": {
                 startTime: "17.30",
                 endTime: "20"
             },
-            {
-                weekday: "Sunday",
+            "Sunday": {
                 startTime: "17.30",
                 endTime: "20"
             }
-        ]
+        }
     },
     {
         name: "Rush Helsinki",
@@ -123,43 +110,36 @@ export const gyms = [
         equipment: ["Lots of trampolines", "Foam pits", "High platform to foam pit", "Angled trampoline to foam pit"],
         website: "https://rushfinland.fi/hinnasto-ja-aukioloajat",
         seasonEnd: "2025-08-05",
-        shifts: [
-            {
-                weekday: "Monday",
+        shifts: {
+            "Monday": {
                 startTime: "10",
                 endTime: "20"
             },
-            {
-                weekday: "Tuesday",
+            "Tuesday": {
                 startTime: "10",
                 endTime: "20"
             },
-            {
-                weekday: "Wednesday",
+            "Wednesday": {
                 startTime: "10",
                 endTime: "20"
             },
-            {
-                weekday: "Thursday",
+            "Thursday": {
                 startTime: "10",
                 endTime: "20"
             },
-            {
-                weekday: "Friday",
+            "Friday": {
                 startTime: "10",
                 endTime: "20"
             },
-            {
-                weekday: "Saturday",
+            "Saturday": {
                 startTime: "10",
                 endTime: "20"
             },
-            {
-                weekday: "Sunday",
+            "Sunday": {
                 startTime: "10",
                 endTime: "18"
-            },
-        ]
+            }
+        }
     },
     {
         name: "Woltti",
@@ -176,43 +156,36 @@ export const gyms = [
         website: "https://superpark.fi/verkkokauppa-vantaa/",
         equipment: ["Trampoline park", "Foam pits"],
         disclaimer: "Mostly kids so might be annoying to train at",
-        shifts: [
-            {
-                weekday: "monday",
+        shifts: {
+            "Monday": {
                 startTime: "11",
                 endTime: "19"
             },
-            {
-                weekday: "tuesday",
+            "Tuesday": {
                 startTime: "11",
                 endTime: "19"
             },
-            {
-                weekday: "wednesday",
+            "Wednesday": {
                 startTime: "11",
                 endTime: "19"
             },
-            {
-                weekday: "thursday",
+            "Thursday": {
                 startTime: "11",
                 endTime: "19"
             },
-            {
-                weekday: "friday",
+            "Friday": {
                 startTime: "11",
                 endTime: "19"
             },
-            {
-                weekday: "saturday",
+            "Saturday": {
                 startTime: "11",
                 endTime: "18"
             },
-            {
-                weekday: "sunday",
+            "Sunday": {
                 startTime: "11",
                 endTime: "18"
-            },
-        ]
+            }
+        }
     },
     {
         name: "OCR Factory",
@@ -220,42 +193,35 @@ export const gyms = [
         disclaimer: "Not exactly a parkour gym, but has some Ninja Warrior -style stuff",
         price: "19 €",
         website: "https://ocrfactory.fi/fi-fi/article/etusivu/yhteystiedot/9/",
-        shifts: [
-            {
-                weekday: "Monday",
+        shifts: {
+            "Monday": {
                 startTime: "05",
                 endTime: "23"
             },
-            {
-                weekday: "Tuesday",
+            "Tuesday": {
                 startTime: "05",
                 endTime: "23"
             },
-            {
-                weekday: "Wednesday",
+            "Wednesday": {
                 startTime: "05",
                 endTime: "23"
             },
-            {
-                weekday: "Thursday",
+            "Thursday": {
                 startTime: "05",
                 endTime: "23"
             },
-            {
-                weekday: "Friday",
+            "Friday": {
                 startTime: "05",
                 endTime: "23"
             },
-            {
-                weekday: "Saturday",
+            "Saturday": {
                 startTime: "05",
                 endTime: "23"
             },
-            {
-                weekday: "Sunday",
+            "Sunday": {
                 startTime: "05",
                 endTime: "23"
-            },
-        ]
+            }
+        }
     },
 ];

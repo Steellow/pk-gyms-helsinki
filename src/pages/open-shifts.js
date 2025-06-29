@@ -55,18 +55,21 @@ function getEventsForWeekday(weekday) {
     try {
         return gyms
             .filter(isGymInSeason)
-            .filter(gym => gym.shifts && Array.isArray(gym.shifts) && gym.shifts.length > 0) // Only gyms with shifts
+            .filter(gym => gym.shifts && typeof gym.shifts === 'object' && Object.keys(gym.shifts).length > 0) // Only gyms with shifts
             .map(gym => {
                 try {
-                    // Normalize weekdays in shifts and validate
-                    const normalizedShifts = gym.shifts.map(shift => ({
-                        ...shift,
-                        weekday: normalizeWeekday(shift.weekday)
-                    }));
+                    // Find shifts for the specific weekday
+                    const shiftsForDay = [];
+                    Object.entries(gym.shifts).forEach(([shiftWeekday, shift]) => {
+                        const normalizedWeekday = normalizeWeekday(shiftWeekday);
+                        if (normalizedWeekday === weekday) {
+                            shiftsForDay.push(shift);
+                        }
+                    });
                     
                     return {
                         name: gym.name,
-                        shifts: normalizedShifts.filter(shift => shift.weekday === weekday),
+                        shifts: shiftsForDay,
                         disclaimer: gym.disclaimer
                     };
                 } catch (error) {
