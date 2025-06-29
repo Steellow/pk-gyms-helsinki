@@ -9,12 +9,18 @@
 
 ## Development
 
-To run the app locally with proper SPA routing support:
+To run the app locally with proper SPA routing support and auto-refresh:
 
+```bash
+npx live-server --port=8000
+```
+
+This will:
+- Serve the app at http://localhost:8000
+- Automatically refresh the page when files change
+- Handle SPA routing (serves `index.html` for all routes)
+
+Alternative (without auto-refresh):
 ```bash
 npx serve -s . -p 8000
 ```
-
-Then open http://localhost:8000 in your browser.
-
-The `-s` flag enables single-page application mode, which serves `index.html` for all routes that don't match files. This prevents 404 errors when refreshing on routes like `/gyms`.

@@ -15,4 +15,4 @@
 
 ## Development
 
-- Use `npx serve -s . -p 8000` to run locally with SPA routing support
+- Use `npx live-server --port=8000` to run locally with SPA routing support and auto-refresh
