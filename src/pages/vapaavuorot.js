@@ -70,7 +70,7 @@ function displayEventsForWeekday(weekday) {
                         <div class="equipment">
                             <div class="price-and-maps">
                                 ${website ? `<div class="website-link"><a href="${website}" target="_blank" rel="noopener noreferrer">🌐 Website <span class="external-icon">↗</span></a></div>` : ''}
-                                ${mapsId ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank">🗺️ Google Maps</a></div>` : ''}
+                                ${mapsId ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank" rel="noopener noreferrer">🗺️ Google Maps <span class="external-icon">↗</span></a></div>` : ''}
                                 ${price ? `<div class="price-item">💰 ${price}</div>` : ''}
                             </div>
                             ${equipment ? equipment.map(item => `<div class="equipment-item">${item}</div>`).join('') : ''}
