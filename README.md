@@ -24,3 +24,24 @@ Alternative (without auto-refresh):
 ```bash
 npx serve -s . -p 8000
 ```
+
+## Data Structure
+
+Gym data is stored in `config/gyms.js`. Each gym object has the following structure:
+
+```javascript
+{
+    name: "Gym Name",                    // Required: String
+    equipment: ["Equipment item 1"],     // Optional: Array of strings with emojis
+    mapsId: "googleMapsId",             // Optional: Google Maps share ID for location
+    price: "15€",             // Optional: Pricing information string
+    disclaimer: "Important note",        // Optional: Warning/disclaimer text
+    shifts: [                           // Required: Array of time slots
+        {
+            weekday: "Monday",          // Required: Full weekday name
+            startTime: "10.30",         // Required: 24h format, dot or colon separator
+            endTime: "16"               // Required: 24h format, dot or colon separator
+        }
+    ]
+}
+```
