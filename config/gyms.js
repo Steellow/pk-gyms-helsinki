@@ -9,30 +9,53 @@ export const gyms = [
     },
     {
         name: "Taitoliikuntakeskus",
-        equipment: ["Soft floor", "Trampolines", "Airtrack"],
-        mapsId: "dPQnoi2VU5wx548X7",
-        price: "15€ / session",
+        equipment: ["Trampolines", "Airtrack"],
+        mapsId: "9VJnQNx9ZHCNxpNz5",
+        price: "10 €",
+        website: "https://taitoliikuntakeskus.fi/pages/aukioloajat",
         actualParkourGym: true,
+        seasonEnd: "2025-07-04",
         shifts: [
             {
                 weekday: "Monday",
-                startTime: "11.20",
+                startTime: "10",
                 endTime: "16"
             },
             {
                 weekday: "Tuesday",
-                startTime: "12",
-                endTime: "18"
+                startTime: "10",
+                endTime: "16"
             },
             {
                 weekday: "Wednesday",
-                startTime: "09",
-                endTime: "15"
+                startTime: "10",
+                endTime: "16"
+            },
+            {
+                weekday: "Thrusday",
+                startTime: "10",
+                endTime: "16"
             },
             {
                 weekday: "Friday",
+                startTime: "10",
+                endTime: "16"
+            }
+        ]
+    },
+    {
+        name: "Voimisteluseura Helsinki",
+        equipment: ["Some soft obstacles for parkour", "Trampolines", "Airtrack"],
+        mapsId: "ouLsNbZzWnL4RBYZ9",
+        website: "https://www.voimisteluseurahelsinki.fi/opengym",
+        price: "10 €",
+        seasonStart: "2025-08-18",
+        seasonEnd: "2025-12-14",
+        shifts: [
+            {
+                weekday: "Saturday",
                 startTime: "14",
-                endTime: "20"
+                endTime: "17"
             }
         ]
     },
