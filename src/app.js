@@ -15,5 +15,21 @@ router.addRoute('/contact', renderContactPage);
 
 // Initialize router when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    router.init();
+    try {
+        router.init();
+    } catch (error) {
+        console.error('Failed to initialize router:', error);
+        console.error('Check config/gyms.js for data validation errors');
+    }
+});
+
+// Global error handler for unhandled errors
+window.addEventListener('error', (event) => {
+    console.error('Unhandled error:', event.error);
+    console.error('This might be caused by invalid gym data in config/gyms.js');
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+    console.error('Unhandled promise rejection:', event.reason);
+    console.error('This might be caused by invalid gym data in config/gyms.js');
 });

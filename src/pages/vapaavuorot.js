@@ -35,15 +35,23 @@ function formatTime(timeStr) {
 }
 
 function getEventsForWeekday(weekday) {
-    return gyms
-        .filter(isGymInSeason)
-        .filter(gym => gym.shifts && Array.isArray(gym.shifts) && gym.shifts.length > 0) // Only gyms with shifts
-        .map(gym => ({
-            name: gym.name,
-            shifts: gym.shifts.filter(shift => shift.weekday === weekday),
-            disclaimer: gym.disclaimer
-        }))
-        .filter(gym => gym.shifts.length > 0)
+    try {
+        return gyms
+            .filter(isGymInSeason)
+            .filter(gym => gym.shifts && Array.isArray(gym.shifts) && gym.shifts.length > 0) // Only gyms with shifts
+            .map(gym => {
+                try {
+                    return {
+                        name: gym.name,
+                        shifts: gym.shifts.filter(shift => shift.weekday === weekday),
+                        disclaimer: gym.disclaimer
+                    };
+                } catch (error) {
+                    console.error(`Error processing gym "${gym.name}":`, error);
+                    return null;
+                }
+            })
+            .filter(gym => gym && gym.shifts.length > 0)
         .sort((a, b) => {
             // First sort by disclaimer presence (no disclaimer comes first)
             const aHasDisclaimer = !!a.disclaimer;
@@ -54,8 +62,17 @@ function getEventsForWeekday(weekday) {
             }
             
             // Then sort by opening time
-            return parseTime(a.shifts[0].startTime) - parseTime(b.shifts[0].startTime);
+            try {
+                return parseTime(a.shifts[0].startTime) - parseTime(b.shifts[0].startTime);
+            } catch (error) {
+                console.error(`Error parsing start time for gym "${a.name}" or "${b.name}":`, error);
+                return 0;
+            }
         });
+    } catch (error) {
+        console.error('Error in getEventsForWeekday:', error);
+        return [];
+    }
 }
 
 function displayEventsForWeekday(weekday) {

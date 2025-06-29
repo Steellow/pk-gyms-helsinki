@@ -1,5 +1,45 @@
 import { gyms } from '../../config/gyms.js';
 
+function validateGymData(gym, index) {
+    const errors = [];
+    
+    if (!gym.name || typeof gym.name !== 'string') {
+        errors.push(`Gym at index ${index}: 'name' is required and must be a string`);
+    }
+    
+    if (!gym.website || typeof gym.website !== 'string') {
+        errors.push(`Gym "${gym.name || `at index ${index}`}": 'website' is required and must be a string`);
+    }
+    
+    if (!gym.mapsId || typeof gym.mapsId !== 'string') {
+        errors.push(`Gym "${gym.name || `at index ${index}`}": 'mapsId' is required and must be a string`);
+    }
+    
+    if (gym.shifts && !Array.isArray(gym.shifts)) {
+        errors.push(`Gym "${gym.name || `at index ${index}`}": 'shifts' must be an array if provided`);
+    }
+    
+    if (gym.shifts && Array.isArray(gym.shifts)) {
+        gym.shifts.forEach((shift, shiftIndex) => {
+            if (!shift.weekday || typeof shift.weekday !== 'string') {
+                errors.push(`Gym "${gym.name}": shift ${shiftIndex} missing or invalid 'weekday'`);
+            }
+            if (!shift.startTime || typeof shift.startTime !== 'string') {
+                errors.push(`Gym "${gym.name}": shift ${shiftIndex} missing or invalid 'startTime'`);
+            }
+            if (!shift.endTime || typeof shift.endTime !== 'string') {
+                errors.push(`Gym "${gym.name}": shift ${shiftIndex} missing or invalid 'endTime'`);
+            }
+        });
+    }
+    
+    if (gym.equipment && !Array.isArray(gym.equipment)) {
+        errors.push(`Gym "${gym.name}": 'equipment' must be an array if provided`);
+    }
+    
+    return errors;
+}
+
 function isGymInSeason(gym) {
     const today = new Date();
     const todayStr = today.toISOString().split('T')[0]; // yyyy-mm-dd format
@@ -44,15 +84,23 @@ function groupShiftsByWeekday(shifts) {
     const weekdayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     
     shifts.forEach(shift => {
-        if (!grouped[shift.weekday]) {
-            grouped[shift.weekday] = [];
+        try {
+            if (!grouped[shift.weekday]) {
+                grouped[shift.weekday] = [];
+            }
+            grouped[shift.weekday].push(shift);
+        } catch (error) {
+            console.error(`Error processing shift:`, shift, error);
         }
-        grouped[shift.weekday].push(shift);
     });
     
     // Sort shifts within each day by start time
     Object.keys(grouped).forEach(weekday => {
-        grouped[weekday].sort((a, b) => parseTime(a.startTime) - parseTime(b.startTime));
+        try {
+            grouped[weekday].sort((a, b) => parseTime(a.startTime) - parseTime(b.startTime));
+        } catch (error) {
+            console.error(`Error sorting shifts for ${weekday}:`, grouped[weekday], error);
+        }
     });
     
     // Return in weekday order
@@ -70,6 +118,20 @@ function displayGyms() {
     const eventsContainer = document.getElementById('gyms-container');
     
     if (!eventsContainer) return;
+    
+    // Validate gym data and log errors
+    let hasErrors = false;
+    gyms.forEach((gym, index) => {
+        const errors = validateGymData(gym, index);
+        if (errors.length > 0) {
+            hasErrors = true;
+            errors.forEach(error => console.error(`Gym data validation error: ${error}`));
+        }
+    });
+    
+    if (hasErrors) {
+        console.error('Fix the above gym data errors in config/gyms.js');
+    }
     
     const inSeasonGyms = gyms.filter(isGymInSeason);
     const sortedGyms = [...inSeasonGyms].sort((a, b) => {
