@@ -15,13 +15,11 @@ class Router {
     getBasePath() {
         // For local development
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            console.log('Router: Local development detected, no base path');
             return '';
         }
         
         // For GitHub Pages: extract repo name from pathname
         const pathSegments = window.location.pathname.split('/').filter(segment => segment);
-        console.log('Router: Path segments:', pathSegments, 'Hostname:', window.location.hostname);
         
         // Check if this is GitHub Pages (either github.io or custom domain with repo path)
         if (pathSegments.length > 0) {
@@ -29,13 +27,11 @@ class Router {
             if (window.location.hostname.includes('github.io') || 
                 (pathSegments.length > 0 && pathSegments[0] === 'pk-gyms-helsinki')) {
                 const basePath = '/' + pathSegments[0];
-                console.log('Router: Base path detected:', basePath);
                 return basePath;
             }
         }
         
         // For custom domains at root or other hosting
-        console.log('Router: No base path detected, using root');
         return '';
     }
     
@@ -57,13 +53,10 @@ class Router {
     }
     
     navigate(path) {
-        console.log('Router: Navigate called with path:', path);
         const relativePath = this.getRelativePath(path);
-        console.log('Router: Relative path:', relativePath, 'Current path:', this.currentPath);
         if (relativePath !== this.currentPath) {
             this.currentPath = relativePath;
             const fullPath = this.getFullPath(relativePath);
-            console.log('Router: Full path for URL:', fullPath);
             window.history.pushState({}, '', fullPath);
             this.handleRoute(relativePath);
         }
