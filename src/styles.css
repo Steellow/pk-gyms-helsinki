@@ -152,19 +152,19 @@ h2 {
 
 /* Gym events */
 .gym-event {
-    background: #ffffff;
-    border: 1px solid #f3f4f6;
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 16px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 16px 0;
+    margin-bottom: 8px;
     transition: all 0.2s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    border-left: 3px solid transparent;
+    padding-left: 16px;
 }
 
 .gym-event:hover {
-    border-color: #e5e7eb;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-    transform: translateY(-1px);
+    background: rgba(59, 130, 246, 0.02);
+    border-left-color: #3b82f6;
 }
 
 .event-header {
@@ -177,16 +177,17 @@ h2 {
 .toggle-arrow {
     width: 0;
     height: 0;
-    border-left: 6px solid #9ca3af;
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-    margin-right: 16px;
-    transition: all 0.2s ease;
+    border-left: 5px solid #9ca3af;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    margin-right: 12px;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
 }
 
 .toggle-arrow.expanded {
     transform: rotate(90deg);
-    border-left-color: #6b7280;
+    border-left-color: #3b82f6;
 }
 
 .event-main {
@@ -197,11 +198,16 @@ h2 {
 }
 
 .gym-name {
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: #111827;
+    font-weight: 500;
+    font-size: 1.125rem;
+    color: #3b82f6;
     margin: 0;
     line-height: 1.4;
+    cursor: pointer;
+}
+
+.gym-name:hover {
+    color: #1d4ed8;
 }
 
 .shift {
@@ -218,37 +224,39 @@ h2 {
 /* Event details */
 .event-details {
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     max-height: 0;
     opacity: 0;
     padding-top: 0;
     margin-top: 0;
+    margin-left: 29px;
 }
 
 .event-details.expanded {
     max-height: 500px;
     opacity: 1;
-    padding-top: 20px;
+    padding-top: 16px;
     margin-top: 0;
 }
 
 .equipment {
     color: #6b7280;
-    font-size: 0.95rem;
-    padding-left: 22px;
+    font-size: 0.9rem;
+    padding-left: 0;
     line-height: 1.6;
 }
 
 .equipment-item {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     position: relative;
+    padding-left: 16px;
 }
 
 .equipment-item::before {
     content: '•';
     color: #9ca3af;
     position: absolute;
-    left: -14px;
+    left: 0;
     font-weight: 600;
 }
 
