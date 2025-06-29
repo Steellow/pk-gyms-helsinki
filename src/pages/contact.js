@@ -4,7 +4,7 @@ export function renderContactPage() {
     pageContent.innerHTML = `
         <div class="contact-container">
             <p class="contact-text">
-                If you notice any missing or outdated information contact me via email or Telegram:
+                If you notice any missing or outdated information, please contact me:
             </p>
             
             <div class="contact-links">
