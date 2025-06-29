@@ -37,6 +37,7 @@ function formatTime(timeStr) {
 function getEventsForWeekday(weekday) {
     return gyms
         .filter(isGymInSeason)
+        .filter(gym => gym.shifts && Array.isArray(gym.shifts) && gym.shifts.length > 0) // Only gyms with shifts
         .map(gym => ({
             name: gym.name,
             shifts: gym.shifts.filter(shift => shift.weekday === weekday),

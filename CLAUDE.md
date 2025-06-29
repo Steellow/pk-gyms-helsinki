@@ -38,3 +38,15 @@ Sorting: Gyms without disclaimers appear first, then sorted alphabetically (All 
 ## Development
 
 - Use `npx live-server --port=8000` to run locally with SPA routing support and auto-refresh
+- Alternative: `npx serve -s . -p 8000` (without auto-refresh)
+- The app includes GitHub Pages SPA support via 404.html redirect handling
+- Cloudflare Web Analytics integrated for usage tracking
+
+## Mobile Features
+
+- Touch-optimized UI with appropriate button sizes and spacing
+- Swipe gestures on "Open gym times" tab: swipe left/right to navigate between weekdays
+- Smart toast notification system to help users discover swipe functionality
+- Auto-centering of active weekday button in horizontal scroll
+- Full-height swipe area for better gesture detection
+- Persistent user preferences via localStorage (toast shown state, swipe discovery)

@@ -1,4 +1,11 @@
 export const gyms = [
+        {
+        name: "Parkourkeskus",
+        mapsId: "8Q9426hWEwuuvDRT8",
+        price: "7 €",
+        website: "https://parkourkeskus.fi/vapaavuorot",
+        disclaimer: "Has some open shifts, but are inconsistent. Check website for latest shifts."
+    },
     {
         name: "Taitoliikuntakeskus",
         equipment: ["🤸 Trampliineja", "🏃 Airtrack", "🔥 Foam pit"],

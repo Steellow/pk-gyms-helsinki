@@ -36,6 +36,10 @@ function formatTime(timeStr) {
 
 // Group shifts by weekday for display
 function groupShiftsByWeekday(shifts) {
+    if (!shifts || !Array.isArray(shifts)) {
+        return {};
+    }
+    
     const grouped = {};
     const weekdayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     
@@ -99,6 +103,8 @@ function displayGyms() {
                 return `<div class="weekday-shifts"><strong>${weekday}:</strong> ${dayShifts}</div>`;
             }).join('');
         
+        const hasShifts = gym.shifts && Array.isArray(gym.shifts) && gym.shifts.length > 0;
+        
         return `
             <div class="gym-event">
                 <div class="event-header" onclick="toggleGym('${eventId}')">
@@ -116,11 +122,17 @@ function displayGyms() {
                         </div>
                         ${equipment ? equipment.map(item => `<div class="equipment-item">${item}</div>`).join('') : ''}
                         ${disclaimer ? `<div class="disclaimer">❗ ${disclaimer}</div>` : ''}
-                        <div class="shifts-section">
-                            <div class="shifts-title">Open hours:</div>
-                            ${shiftsHTML}
-                            <div class="hours-note">Check website for exceptions and most recent info about opening hours</div>
-                        </div>
+                        ${hasShifts ? `
+                            <div class="shifts-section">
+                                <div class="shifts-title">Open hours:</div>
+                                ${shiftsHTML}
+                                <div class="hours-note">Check website for exceptions and most recent info about opening hours</div>
+                            </div>
+                        ` : `
+                            <div class="shifts-section">
+                                <div class="no-shifts">No regular open hours available. Check website for current information.</div>
+                            </div>
+                        `}
                     </div>
                 </div>
             </div>

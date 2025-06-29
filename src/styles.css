@@ -354,6 +354,13 @@ h2 {
     line-height: 1.4;
 }
 
+.no-shifts {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.5;
+}
+
 /* Disclaimer */
 .disclaimer {
     color: #d97706;
