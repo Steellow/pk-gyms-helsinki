@@ -1,11 +1,16 @@
-# PK GYMS HELSINKI
+# Parkour gyms Helsinki
 
-<INSERT PAGE URL HERE>
+> Live page [here](https://git.hanki.dev/pk-gyms-helsinki/)
 
-- A simple web app with info about parkour gyms in Helsinki where one can train
-- Has a schedules for free shifts
-- Plain html/css/js, no node or anything
+- A simple web app with info about parkour gyms in Helsinki area
+- Shows what gyms have open shifts on each day
+- Plain html/css/js, no Node.js or anything
+- Hosted with GitHub Pages
 - First project I've done with Claude Code
+
+## Updating data
+
+- Update `config/gyms.js` and push to GitHub,
 
 ## Development
 

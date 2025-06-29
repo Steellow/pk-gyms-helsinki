@@ -42,7 +42,7 @@ Sorting: Actual parkour gyms (actualParkourGym: true) appear first, then gyms wi
 - Use `npx live-server --port=8000` to run locally with SPA routing support and auto-refresh
 - Alternative: `npx serve -s . -p 8000` (without auto-refresh)
 - The app includes GitHub Pages SPA support via 404.html redirect handling
-- Cloudflare Web Analytics integrated for usage tracking
+- Goat Counter Web Analytics integrated for usage tracking
 
 ## Mobile Features
 
