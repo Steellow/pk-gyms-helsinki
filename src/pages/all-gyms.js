@@ -161,7 +161,15 @@ function displayGyms() {
     
     const inSeasonGyms = gyms.filter(isGymInSeason);
     const sortedGyms = [...inSeasonGyms].sort((a, b) => {
-        // First sort by disclaimer presence (no disclaimer comes first)
+        // First sort by actualParkourGym (true comes first)
+        const aIsActualParkour = !!a.actualParkourGym;
+        const bIsActualParkour = !!b.actualParkourGym;
+        
+        if (aIsActualParkour !== bIsActualParkour) {
+            return aIsActualParkour ? -1 : 1;
+        }
+        
+        // Then sort by disclaimer presence (no disclaimer comes first)
         const aHasDisclaimer = !!a.disclaimer;
         const bHasDisclaimer = !!b.disclaimer;
         
@@ -169,7 +177,7 @@ function displayGyms() {
             return aHasDisclaimer ? 1 : -1;
         }
         
-        // Then sort alphabetically
+        // Finally sort alphabetically
         return a.name.localeCompare(b.name);
     });
     
@@ -180,6 +188,7 @@ function displayGyms() {
         const price = gym.price;
         const disclaimer = gym.disclaimer;
         const website = gym.website;
+        const actualParkourGym = gym.actualParkourGym;
         
         // Group shifts by weekday
         const groupedShifts = groupShiftsByWeekday(gym.shifts);
@@ -198,7 +207,7 @@ function displayGyms() {
                 <div class="event-header" onclick="toggleGym('${eventId}')">
                     <div class="toggle-arrow" id="arrow-${eventId}"></div>
                     <div class="event-main">
-                        <div class="gym-name">${gym.name}</div>
+                        <div class="gym-name ${actualParkourGym ? 'actual-parkour-gym' : ''}">${gym.name}${actualParkourGym ? ' 🔥' : ''}</div>
                     </div>
                 </div>
                 <div class="event-details" id="details-${eventId}">

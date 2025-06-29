@@ -76,7 +76,18 @@ function getEventsForWeekday(weekday) {
             })
             .filter(gym => gym && gym.shifts.length > 0)
         .sort((a, b) => {
-            // First sort by disclaimer presence (no disclaimer comes first)
+            const aGymData = gyms.find(g => g.name === a.name);
+            const bGymData = gyms.find(g => g.name === b.name);
+            
+            // First sort by actualParkourGym (true comes first)
+            const aIsActualParkour = !!aGymData?.actualParkourGym;
+            const bIsActualParkour = !!bGymData?.actualParkourGym;
+            
+            if (aIsActualParkour !== bIsActualParkour) {
+                return aIsActualParkour ? -1 : 1;
+            }
+            
+            // Then sort by disclaimer presence (no disclaimer comes first)
             const aHasDisclaimer = !!a.disclaimer;
             const bHasDisclaimer = !!b.disclaimer;
             
@@ -84,7 +95,7 @@ function getEventsForWeekday(weekday) {
                 return aHasDisclaimer ? 1 : -1;
             }
             
-            // Then sort by opening time
+            // Finally sort by opening time
             try {
                 return parseTime(a.shifts[0].startTime) - parseTime(b.shifts[0].startTime);
             } catch (error) {
@@ -121,13 +132,14 @@ function displayEventsForWeekday(weekday) {
         const price = gymData?.price;
         const disclaimer = gymData?.disclaimer;
         const website = gymData?.website;
+        const actualParkourGym = gymData?.actualParkourGym;
         
         return `
             <div class="gym-event">
                 <div class="event-header" onclick="toggleEvent('${eventId}')">
                     <div class="toggle-arrow" id="arrow-${eventId}"></div>
                     <div class="event-main">
-                        <div class="gym-name">${gym.name}</div>
+                        <div class="gym-name ${actualParkourGym ? 'actual-parkour-gym' : ''}">${gym.name}${actualParkourGym ? ' 🔥' : ''}</div>
                         ${shiftsHTML}
                     </div>
                 </div>

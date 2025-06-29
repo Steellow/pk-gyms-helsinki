@@ -210,6 +210,10 @@ h2 {
     color: #1d4ed8;
 }
 
+.gym-name.actual-parkour-gym {
+    font-weight: 600;
+}
+
 .shift {
     color: #6b7280;
     font-size: 0.875rem;

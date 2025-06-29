@@ -24,6 +24,7 @@ Gym data in `config/gyms.js` follows this structure:
 - `equipment` (optional): Array of strings with emojis - Available equipment
 - `price` (optional): String - Pricing information 
 - `disclaimer` (optional): String - Warning/disclaimer text (shows with ❗ emoji)
+- `actualParkourGym` (optional): Boolean - If true, shows gym name in bold with 🔥 emoji and sorts first
 - `seasonStart` (optional): String - Season start date in yyyy-mm-dd format
 - `seasonEnd` (optional): String - Season end date in yyyy-mm-dd format
 - `shifts` (optional): Array of time slot objects:
@@ -33,7 +34,7 @@ Gym data in `config/gyms.js` follows this structure:
 
 Season logic: Gyms only show if current date is within season. No season fields = always show. Only one field = open-ended season.
 
-Sorting: Gyms without disclaimers appear first, then sorted alphabetically (All gyms) or by opening time (Open gym times).
+Sorting: Actual parkour gyms (actualParkourGym: true) appear first, then gyms without disclaimers, then sorted alphabetically (All gyms) or by opening time (Open gym times).
 
 ## Development
 

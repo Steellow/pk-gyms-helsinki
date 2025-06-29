@@ -37,6 +37,7 @@ Gym data is stored in `config/gyms.js`. Each gym object has the following struct
     equipment: ["Equipment item 1"],     // Optional: Array of strings with emojis
     price: "15€",                       // Optional: Pricing information string
     disclaimer: "Important note",        // Optional: Warning/disclaimer text
+    actualParkourGym: true,             // Optional: Boolean, shows gym with bold text + 🔥 emoji and sorts first
     seasonStart: "2024-09-01",          // Optional: Season start date (yyyy-mm-dd)
     seasonEnd: "2025-05-31",            // Optional: Season end date (yyyy-mm-dd)
     shifts: [                           // Optional: Array of time slots
