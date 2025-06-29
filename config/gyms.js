@@ -55,7 +55,30 @@ export const gyms = [
                 startTime: "18.15",
                 endTime: "20.15"
             }
-        }
+        },
+        actualParkourGym: true
+    },
+    {
+        name: "Parkour Akatemia Lauttasaari",
+        mapsId: "9FcwgDJGNFXqaJ8p6",
+        website: "https://parkourakatemia.fi/lauttasaari/ilmoittautuminen",
+        price: "5 €",
+        seasonStart: "2025-08-11",
+        seasonEnd: "2025-12-14",
+        equipment: ["Acrobatics area with small trampoline & mattresses", "Small airtrack"],
+        shifts: {
+            "sunday": {
+                startTime: "18",
+                endTime: "19.30"
+            }
+        },
+        actualParkourGym: true
+    },
+        {
+        name: "Parkour Akatemia Espoo",
+        mapsId: "58mU6CnjSp59o8Bz9",
+        website: "https://parkourakatemia.fi/espoo/ilmoittautuminen/",
+        actualParkourGym: true
     },
     {
         name: "Voimisteluseura Helsinki",
