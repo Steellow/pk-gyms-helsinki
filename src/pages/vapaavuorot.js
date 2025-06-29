@@ -1,5 +1,22 @@
 import { gyms } from '../../config/gyms.js';
 
+function normalizeWeekday(weekday) {
+    if (typeof weekday !== 'string') return weekday;
+    
+    const normalized = weekday.toLowerCase();
+    const weekdayMap = {
+        'monday': 'Monday',
+        'tuesday': 'Tuesday', 
+        'wednesday': 'Wednesday',
+        'thursday': 'Thursday',
+        'friday': 'Friday',
+        'saturday': 'Saturday',
+        'sunday': 'Sunday'
+    };
+    
+    return weekdayMap[normalized] || weekday;
+}
+
 function isGymInSeason(gym) {
     const today = new Date();
     const todayStr = today.toISOString().split('T')[0]; // yyyy-mm-dd format
@@ -41,9 +58,15 @@ function getEventsForWeekday(weekday) {
             .filter(gym => gym.shifts && Array.isArray(gym.shifts) && gym.shifts.length > 0) // Only gyms with shifts
             .map(gym => {
                 try {
+                    // Normalize weekdays in shifts and validate
+                    const normalizedShifts = gym.shifts.map(shift => ({
+                        ...shift,
+                        weekday: normalizeWeekday(shift.weekday)
+                    }));
+                    
                     return {
                         name: gym.name,
-                        shifts: gym.shifts.filter(shift => shift.weekday === weekday),
+                        shifts: normalizedShifts.filter(shift => shift.weekday === weekday),
                         disclaimer: gym.disclaimer
                     };
                 } catch (error) {

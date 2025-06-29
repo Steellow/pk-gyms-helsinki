@@ -98,7 +98,7 @@ export const gyms = [
                 endTime: "23"
             },
             {
-                weekday: "Saturdayy",
+                weekday: "Saturday",
                 startTime: "05",
                 endTime: "23"
             },

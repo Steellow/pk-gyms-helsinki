@@ -1,7 +1,25 @@
 import { gyms } from '../../config/gyms.js';
 
+function normalizeWeekday(weekday) {
+    if (typeof weekday !== 'string') return weekday;
+    
+    const normalized = weekday.toLowerCase();
+    const weekdayMap = {
+        'monday': 'Monday',
+        'tuesday': 'Tuesday', 
+        'wednesday': 'Wednesday',
+        'thursday': 'Thursday',
+        'friday': 'Friday',
+        'saturday': 'Saturday',
+        'sunday': 'Sunday'
+    };
+    
+    return weekdayMap[normalized] || weekday;
+}
+
 function validateGymData(gym, index) {
     const errors = [];
+    const validWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     
     if (!gym.name || typeof gym.name !== 'string') {
         errors.push(`Gym at index ${index}: 'name' is required and must be a string`);
@@ -23,6 +41,14 @@ function validateGymData(gym, index) {
         gym.shifts.forEach((shift, shiftIndex) => {
             if (!shift.weekday || typeof shift.weekday !== 'string') {
                 errors.push(`Gym "${gym.name}": shift ${shiftIndex} missing or invalid 'weekday'`);
+            } else {
+                const normalizedWeekday = normalizeWeekday(shift.weekday);
+                if (!validWeekdays.includes(normalizedWeekday)) {
+                    errors.push(`Gym "${gym.name}": shift ${shiftIndex} has invalid weekday "${shift.weekday}". Valid options: ${validWeekdays.join(', ')}`);
+                } else {
+                    // Normalize the weekday in place
+                    shift.weekday = normalizedWeekday;
+                }
             }
             if (!shift.startTime || typeof shift.startTime !== 'string') {
                 errors.push(`Gym "${gym.name}": shift ${shiftIndex} missing or invalid 'startTime'`);
