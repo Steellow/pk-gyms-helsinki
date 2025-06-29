@@ -423,3 +423,16 @@ h2 {
     opacity: 0.7;
     margin-left: 4px;
 }
+
+/* Text link styling */
+.text-link {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.text-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}

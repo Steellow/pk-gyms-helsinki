@@ -109,6 +109,9 @@ export function renderGymsPage() {
     
     pageContent.innerHTML = `
         <div id="gyms-container"></div>
+        <div style="margin-top: 24px; text-align: center;">
+            <a href="https://maps.app.goo.gl/MLcL3uAfPMg53FyXA" target="_blank" rel="noopener noreferrer" class="text-link">Gyms on Google Maps <span class="external-icon">↗</span></a>
+        </div>
     `;
     
     displayGyms();
