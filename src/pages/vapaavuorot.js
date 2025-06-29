@@ -163,6 +163,77 @@ function getCurrentWeekday() {
     return days[today.getDay()];
 }
 
+function setupSwipeGestures() {
+    const eventsContainer = document.getElementById('events-container');
+    if (!eventsContainer) return;
+    
+    let startX = null;
+    let startY = null;
+    const minSwipeDistance = 30;
+    const maxVerticalDistance = 150;
+    
+    const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    
+    function getCurrentActiveWeekday() {
+        const activeButton = document.querySelector('.weekday-title.active');
+        return activeButton ? activeButton.getAttribute('data-weekday') : getCurrentWeekday();
+    }
+    
+    function navigateToWeekday(direction) {
+        const currentWeekday = getCurrentActiveWeekday();
+        const currentIndex = weekdays.indexOf(currentWeekday);
+        
+        let newIndex;
+        if (direction === 'next') {
+            newIndex = (currentIndex + 1) % weekdays.length;
+        } else {
+            newIndex = (currentIndex - 1 + weekdays.length) % weekdays.length;
+        }
+        
+        setActiveWeekday(weekdays[newIndex]);
+    }
+    
+    // Ensure the events container takes up available screen height for touch events
+    const updateContainerHeight = () => {
+        const viewportHeight = window.innerHeight;
+        const containerTop = eventsContainer.getBoundingClientRect().top;
+        const minHeight = Math.max(200, viewportHeight - containerTop - 20); // 20px bottom padding
+        eventsContainer.style.minHeight = `${minHeight}px`;
+    };
+    
+    updateContainerHeight();
+    window.addEventListener('resize', updateContainerHeight);
+    
+    eventsContainer.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    eventsContainer.addEventListener('touchend', (e) => {
+        if (!startX || !startY) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+        
+        // Check if it's a horizontal swipe (not vertical scroll)
+        if (Math.abs(deltaX) > minSwipeDistance && Math.abs(deltaY) < maxVerticalDistance) {
+            if (deltaX > 0) {
+                // Swipe right - go to previous day
+                navigateToWeekday('prev');
+            } else {
+                // Swipe left - go to next day
+                navigateToWeekday('next');
+            }
+        }
+        
+        startX = null;
+        startY = null;
+    }, { passive: true });
+}
+
 export function renderVapaavuorotPage() {
     const pageContent = document.getElementById('page-content');
     
@@ -190,4 +261,7 @@ export function renderVapaavuorotPage() {
             setActiveWeekday(weekday);
         });
     });
+    
+    // Add swipe gesture support for mobile
+    setupSwipeGestures();
 }
