@@ -19,14 +19,14 @@
 
 Gym data in `config/gyms.js` follows this structure:
 - `name` (required): String - Gym name
+- `website` (required): String - Full URL to gym website (shows with 🌐 emoji)
+- `mapsId` (required): String - Google Maps share ID for location links
 - `equipment` (optional): Array of strings with emojis - Available equipment
-- `website` (optional): String - Full URL to gym website (shows with 🌐 emoji)
-- `mapsId` (optional): String - Google Maps share ID for location links
 - `price` (optional): String - Pricing information 
 - `disclaimer` (optional): String - Warning/disclaimer text (shows with ❗ emoji)
 - `seasonStart` (optional): String - Season start date in yyyy-mm-dd format
 - `seasonEnd` (optional): String - Season end date in yyyy-mm-dd format
-- `shifts` (required): Array of time slot objects:
+- `shifts` (optional): Array of time slot objects:
   - `weekday` (required): String - Full weekday name (Monday, Tuesday, etc.)
   - `startTime` (required): String - 24h format with dot or colon (e.g. "10.30", "16:00")
   - `endTime` (required): String - 24h format with dot or colon

@@ -32,14 +32,14 @@ Gym data is stored in `config/gyms.js`. Each gym object has the following struct
 ```javascript
 {
     name: "Gym Name",                    // Required: String
+    website: "https://example.com",      // Required: Full URL to gym website
+    mapsId: "googleMapsId",             // Required: Google Maps share ID for location
     equipment: ["Equipment item 1"],     // Optional: Array of strings with emojis
-    website: "https://example.com",      // Optional: Full URL to gym website
-    mapsId: "googleMapsId",             // Optional: Google Maps share ID for location
     price: "15€",                       // Optional: Pricing information string
     disclaimer: "Important note",        // Optional: Warning/disclaimer text
     seasonStart: "2024-09-01",          // Optional: Season start date (yyyy-mm-dd)
     seasonEnd: "2025-05-31",            // Optional: Season end date (yyyy-mm-dd)
-    shifts: [                           // Required: Array of time slots
+    shifts: [                           // Optional: Array of time slots
         {
             weekday: "Monday",          // Required: Full weekday name
             startTime: "10.30",         // Required: 24h format, dot or colon separator
