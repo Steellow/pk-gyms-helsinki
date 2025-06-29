@@ -5,6 +5,8 @@
 - UI should look modern, sleek and minimal, with flat elements
 - Should always be pleasant to use on both mobile and desktop
 - Uses client-side routing for SPA functionality
+- Mobile-optimized with touch gestures and responsive design
+- Includes swipe navigation for weekdays on mobile devices
 
 ## File structure
 
