@@ -75,6 +75,7 @@ function displayEventsForWeekday(weekday) {
                             </div>
                             ${equipment ? equipment.map(item => `<div class="equipment-item">${item}</div>`).join('') : ''}
                             ${disclaimer ? `<div class="disclaimer">❗ ${disclaimer}</div>` : ''}
+                            <div class="hours-note">Check website for exceptions and most recent info about opening hours</div>
                         </div>
                     </div>
                 ` : ''}

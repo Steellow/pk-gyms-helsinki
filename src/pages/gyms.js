@@ -94,6 +94,7 @@ function displayGyms() {
                         <div class="shifts-section">
                             <div class="shifts-title">Open hours:</div>
                             ${shiftsHTML}
+                            <div class="hours-note">Check website for exceptions and most recent info about opening hours</div>
                         </div>
                     </div>
                 </div>

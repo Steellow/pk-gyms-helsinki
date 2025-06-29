@@ -346,6 +346,14 @@ h2 {
     font-weight: 500;
 }
 
+.hours-note {
+    color: #9ca3af;
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-top: 12px;
+    line-height: 1.4;
+}
+
 /* Disclaimer */
 .disclaimer {
     color: #d97706;
