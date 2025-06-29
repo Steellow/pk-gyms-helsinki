@@ -163,6 +163,40 @@ function getCurrentWeekday() {
     return days[today.getDay()];
 }
 
+// Toast notification system
+let clickCount = 0;
+let hasShownToast = localStorage.getItem('swipeToastShown') === 'true';
+let hasUsedSwipe = localStorage.getItem('hasUsedSwipe') === 'true';
+
+function showSwipeToast() {
+    if (hasShownToast) return;
+    
+    const toast = document.createElement('div');
+    toast.className = 'swipe-toast';
+    toast.innerHTML = 'You can also swipe to change the day!';
+    document.body.appendChild(toast);
+    
+    // Show toast
+    setTimeout(() => toast.classList.add('show'), 100);
+    
+    // Hide toast after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            if (document.body.contains(toast)) {
+                document.body.removeChild(toast);
+            }
+        }, 300);
+    }, 3000);
+    
+    hasShownToast = true;
+    localStorage.setItem('swipeToastShown', 'true');
+}
+
+function isMobileDevice() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+}
+
 function setupSwipeGestures() {
     const eventsContainer = document.getElementById('events-container');
     if (!eventsContainer) return;
@@ -220,6 +254,9 @@ function setupSwipeGestures() {
         
         // Check if it's a horizontal swipe (not vertical scroll)
         if (Math.abs(deltaX) > minSwipeDistance && Math.abs(deltaY) < maxVerticalDistance) {
+            hasUsedSwipe = true; // User discovered swipe functionality
+            localStorage.setItem('hasUsedSwipe', 'true');
+            
             if (deltaX > 0) {
                 // Swipe right - go to previous day
                 navigateToWeekday('prev');
@@ -259,6 +296,14 @@ export function renderVapaavuorotPage() {
         title.addEventListener('click', () => {
             const weekday = title.getAttribute('data-weekday');
             setActiveWeekday(weekday);
+            
+            // Track clicks and show toast if user is on mobile and hasn't used swipe
+            if (isMobileDevice() && !hasUsedSwipe && !hasShownToast) {
+                clickCount++;
+                if (clickCount >= 2) {
+                    showSwipeToast();
+                }
+            }
         });
     });
     
