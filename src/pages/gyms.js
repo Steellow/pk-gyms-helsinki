@@ -71,9 +71,11 @@ function displayGyms() {
                 </div>
                 <div class="event-details" id="details-${eventId}">
                     <div class="equipment">
-                        ${price ? `<div class="price-item">💰 ${price}</div>` : ''}
+                        <div class="price-and-maps">
+                            ${mapsId ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank">🗺️ Google Maps</a></div>` : ''}
+                            ${price ? `<div class="price-item">💰 ${price}</div>` : ''}
+                        </div>
                         ${equipment ? equipment.map(item => `<div class="equipment-item">${item}</div>`).join('') : ''}
-                        ${mapsId ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank">🗺️ Google Maps</a></div>` : ''}
                         <div class="shifts-section">
                             <div class="shifts-title">Open hours:</div>
                             ${shiftsHTML}
