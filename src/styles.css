@@ -468,6 +468,22 @@ h2 {
     justify-content: center;
 }
 
+.source-link {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid #f3f4f6;
+    text-align: center;
+}
+
+.source-link a {
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+.source-link a:hover {
+    color: #6b7280;
+}
+
 @media (max-width: 480px) {
     .contact-links {
         gap: 16px;
@@ -480,5 +496,10 @@ h2 {
     .contact-icon {
         width: 28px;
         font-size: 1.1rem;
+    }
+    
+    .source-link {
+        margin-top: 24px;
+        padding-top: 16px;
     }
 }

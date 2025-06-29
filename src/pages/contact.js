@@ -20,6 +20,12 @@ export function renderContactPage() {
                     </a>
                 </div>
             </div>
+            
+            <div class="source-link">
+                <a href="https://github.com/Steellow/pk-gyms-helsinki" target="_blank" rel="noopener noreferrer" class="text-link">
+                    View source code <span class="external-icon">↗</span>
+                </a>
+            </div>
         </div>
     `;
 }
