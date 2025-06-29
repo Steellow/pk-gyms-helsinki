@@ -136,6 +136,22 @@ function setActiveWeekday(selectedWeekday) {
     const selectedTitle = document.querySelector(`[data-weekday="${selectedWeekday}"]`);
     if (selectedTitle) {
         selectedTitle.classList.add('active');
+        
+        // Scroll the active weekday to center on mobile
+        const weekdaysContainer = document.querySelector('.weekdays');
+        if (weekdaysContainer) {
+            const containerWidth = weekdaysContainer.clientWidth;
+            const buttonWidth = selectedTitle.offsetWidth;
+            const buttonLeft = selectedTitle.offsetLeft;
+            
+            // Calculate scroll position to center the button
+            const scrollLeft = buttonLeft - (containerWidth / 2) + (buttonWidth / 2);
+            
+            weekdaysContainer.scrollTo({
+                left: scrollLeft,
+                behavior: 'smooth'
+            });
+        }
     }
     
     displayEventsForWeekday(selectedWeekday);
