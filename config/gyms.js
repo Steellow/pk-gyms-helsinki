@@ -9,9 +9,10 @@ export const gyms = [
     },
     {
         name: "Taitoliikuntakeskus",
-        equipment: ["🤸 Trampolines", "🏃 Airtrack", "🔥 Foam pit"],
+        equipment: ["Soft floor", "Trampolines", "Airtrack"],
         mapsId: "dPQnoi2VU5wx548X7",
         price: "15€ / session",
+        actualParkourGym: true,
         shifts: [
             {
                 weekday: "Monday",
@@ -66,6 +67,52 @@ export const gyms = [
         ]
     },
     {
+        name: "Rush Helsinki",
+        mapsId: "nbRipsLdcmr8dNL68",
+        price: "24.9 € / 2h, other options available",
+        disclaimer: "Trampoline park, mostly kids so might be annoying to train at. Tickets are chaper to reserve online.",
+        equipment: ["Lots of trampolines", "Foam pits", "High platform to foam pit", "Angled trampoline to foam pit"],
+        website: "https://rushfinland.fi/hinnasto-ja-aukioloajat",
+        seasonEnd: "2025-08-05",
+        shifts: [
+            {
+                weekday: "Monday",
+                startTime: "10",
+                endTime: "20"
+            },
+            {
+                weekday: "Tuesday",
+                startTime: "10",
+                endTime: "20"
+            },
+            {
+                weekday: "Wednesday",
+                startTime: "10",
+                endTime: "20"
+            },
+            {
+                weekday: "Thursday",
+                startTime: "10",
+                endTime: "20"
+            },
+            {
+                weekday: "Friday",
+                startTime: "10",
+                endTime: "20"
+            },
+            {
+                weekday: "Saturday",
+                startTime: "10",
+                endTime: "20"
+            },
+            {
+                weekday: "Sunday",
+                startTime: "10",
+                endTime: "18"
+            },
+        ]
+    },
+    {
         name: "Woltti",
         mapsId: "HeZTztyziKCNqDQJ8",
         price: "1h: 14 € / 2h: 22 €",
@@ -79,7 +126,7 @@ export const gyms = [
         price: "20 € / 2h, other options available",
         website: "https://superpark.fi/verkkokauppa-vantaa/",
         equipment: ["Trampoline park", "Foam pits"],
-        disclaimer: "Trampoline park full of kids, might be annoying to train at",
+        disclaimer: "Mostly kids so might be annoying to train at",
         shifts: [
             {
                 weekday: "monday",

@@ -183,7 +183,12 @@ function displayGyms() {
     
     const gymsHTML = sortedGyms.map((gym, gymIndex) => {
         const eventId = `gym-${gymIndex}`;
-        const equipment = gym.equipment;
+        let equipment = gym.equipment || [];
+        
+        // Add parkour equipment as first item for actual parkour gyms
+        if (gym.actualParkourGym) {
+            equipment = ['🏃 Parkour obstacles and bars', ...equipment];
+        }
         const mapsId = gym.mapsId;
         const price = gym.price;
         const disclaimer = gym.disclaimer;

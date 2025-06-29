@@ -127,7 +127,12 @@ function displayEventsForWeekday(weekday) {
         
         const eventId = `event-${gymIndex}`;
         const gymData = gyms.find(g => g.name === gym.name);
-        const equipment = gymData?.equipment;
+        let equipment = gymData?.equipment || [];
+        
+        // Add parkour equipment as first item for actual parkour gyms
+        if (gymData?.actualParkourGym) {
+            equipment = ['🏃 Parkour obstacles and bars', ...equipment];
+        }
         const mapsId = gymData?.mapsId;
         const price = gymData?.price;
         const disclaimer = gymData?.disclaimer;
