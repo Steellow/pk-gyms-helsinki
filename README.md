@@ -6,6 +6,7 @@
 - Shows what gyms have open shifts on each day
 - Plain html/css/js, no Node.js or anything
 - Hosted with GitHub Pages
+- Analytics with [GoatCounter](https://www.goatcounter.com/)
 - First project I've done with Claude Code
 
 ## Updating data
