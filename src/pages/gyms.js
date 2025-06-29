@@ -62,6 +62,7 @@ function displayGyms() {
         const mapsId = gym.mapsId;
         const price = gym.price;
         const disclaimer = gym.disclaimer;
+        const website = gym.website;
         
         // Group shifts by weekday
         const groupedShifts = groupShiftsByWeekday(gym.shifts);
@@ -84,6 +85,7 @@ function displayGyms() {
                 <div class="event-details" id="details-${eventId}">
                     <div class="equipment">
                         <div class="price-and-maps">
+                            ${website ? `<div class="website-link"><a href="${website}" target="_blank" rel="noopener noreferrer">🌐 Website <span class="external-icon">↗</span></a></div>` : ''}
                             ${mapsId ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank">🗺️ Google Maps</a></div>` : ''}
                             ${price ? `<div class="price-item">💰 ${price}</div>` : ''}
                         </div>

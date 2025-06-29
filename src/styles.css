@@ -279,11 +279,13 @@ h2 {
     border: 1px solid #d1fae5;
 }
 
-.maps-link {
+.maps-link,
+.website-link {
     margin-top: 0;
 }
 
-.maps-link a {
+.maps-link a,
+.website-link a {
     color: #3b82f6;
     text-decoration: none;
     font-size: 0.875rem;
@@ -296,7 +298,8 @@ h2 {
     transition: all 0.2s ease;
 }
 
-.maps-link a:hover {
+.maps-link a:hover,
+.website-link a:hover {
     background: #dbeafe;
     border-color: #bfdbfe;
     transform: translateY(-1px);

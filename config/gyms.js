@@ -60,6 +60,7 @@ export const gyms = [
         equipment: ["🏃‍♂️ Parkour course", "📦 Vaulting boxes", "⚖️ Balance beams"],
         disclaimer: "Test gym, not real",
         mapsId: "xyz789uvw012",
+        website: "hanki.dev",
         price: "20€ / monthly",
         shifts: [
             {

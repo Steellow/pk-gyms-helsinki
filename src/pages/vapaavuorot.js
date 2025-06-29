@@ -54,6 +54,7 @@ function displayEventsForWeekday(weekday) {
         const mapsId = gymData?.mapsId;
         const price = gymData?.price;
         const disclaimer = gymData?.disclaimer;
+        const website = gymData?.website;
         
         return `
             <div class="gym-event">
@@ -64,10 +65,11 @@ function displayEventsForWeekday(weekday) {
                         ${shiftsHTML}
                     </div>
                 </div>
-                ${(equipment || mapsId || price || disclaimer) ? `
+                ${(equipment || mapsId || price || disclaimer || website) ? `
                     <div class="event-details" id="details-${eventId}">
                         <div class="equipment">
                             <div class="price-and-maps">
+                                ${website ? `<div class="website-link"><a href="${website}" target="_blank" rel="noopener noreferrer">🌐 Website <span class="external-icon">↗</span></a></div>` : ''}
                                 ${mapsId ? `<div class="maps-link"><a href="https://maps.app.goo.gl/${mapsId}" target="_blank">🗺️ Google Maps</a></div>` : ''}
                                 ${price ? `<div class="price-item">💰 ${price}</div>` : ''}
                             </div>

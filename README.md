@@ -33,8 +33,9 @@ Gym data is stored in `config/gyms.js`. Each gym object has the following struct
 {
     name: "Gym Name",                    // Required: String
     equipment: ["Equipment item 1"],     // Optional: Array of strings with emojis
+    website: "https://example.com",      // Optional: Full URL to gym website
     mapsId: "googleMapsId",             // Optional: Google Maps share ID for location
-    price: "15€",             // Optional: Pricing information string
+    price: "15€",                       // Optional: Pricing information string
     disclaimer: "Important note",        // Optional: Warning/disclaimer text
     shifts: [                           // Required: Array of time slots
         {
