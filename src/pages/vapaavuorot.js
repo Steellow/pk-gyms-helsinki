@@ -1,5 +1,29 @@
 import { gyms } from '../../config/gyms.js';
 
+function isGymInSeason(gym) {
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0]; // yyyy-mm-dd format
+    
+    const { seasonStart, seasonEnd } = gym;
+    
+    // If no season restrictions, gym is always available
+    if (!seasonStart && !seasonEnd) {
+        return true;
+    }
+    
+    // Check season start
+    if (seasonStart && todayStr < seasonStart) {
+        return false;
+    }
+    
+    // Check season end
+    if (seasonEnd && todayStr > seasonEnd) {
+        return false;
+    }
+    
+    return true;
+}
+
 function parseTime(timeStr) {
     const [hours, minutes = "00"] = timeStr.split(/[.:]/).map(str => str.padStart(2, '0'));
     return parseInt(hours) * 60 + parseInt(minutes);
@@ -12,6 +36,7 @@ function formatTime(timeStr) {
 
 function getEventsForWeekday(weekday) {
     return gyms
+        .filter(isGymInSeason)
         .map(gym => ({
             name: gym.name,
             shifts: gym.shifts.filter(shift => shift.weekday === weekday),

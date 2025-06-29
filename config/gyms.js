@@ -32,6 +32,8 @@ export const gyms = [
         equipment: ["💪 Pull-up bars", "🤲 Parallettes", "💍 Rings"],
         mapsId: "dPQnoi2VU5wx548X7",
         price: "12€ / day pass",
+        seasonStart: "2025-09-01",
+        seasonEnd: "2026-05-31",
         shifts: [
             {
                 weekday: "Monday",
@@ -62,6 +64,7 @@ export const gyms = [
         mapsId: "xyz789uvw012",
         website: "hanki.dev",
         price: "20€ / monthly",
+        seasonEnd: "2025-12-31",
         shifts: [
             {
                 weekday: "Tuesday",

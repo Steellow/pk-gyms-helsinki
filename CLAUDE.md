@@ -22,10 +22,14 @@ Gym data in `config/gyms.js` follows this structure:
 - `mapsId` (optional): String - Google Maps share ID for location links
 - `price` (optional): String - Pricing information 
 - `disclaimer` (optional): String - Warning/disclaimer text (shows with ❗ emoji)
+- `seasonStart` (optional): String - Season start date in yyyy-mm-dd format
+- `seasonEnd` (optional): String - Season end date in yyyy-mm-dd format
 - `shifts` (required): Array of time slot objects:
   - `weekday` (required): String - Full weekday name (Monday, Tuesday, etc.)
   - `startTime` (required): String - 24h format with dot or colon (e.g. "10.30", "16:00")
   - `endTime` (required): String - 24h format with dot or colon
+
+Season logic: Gyms only show if current date is within season. No season fields = always show. Only one field = open-ended season.
 
 Sorting: Gyms without disclaimers appear first, then sorted alphabetically (All gyms) or by opening time (Open gym times).
 
