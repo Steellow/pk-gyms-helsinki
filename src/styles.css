@@ -672,6 +672,9 @@ h2 {
     .website-link a {
         font-size: 0.75rem;
         padding: 4px 8px;
+        min-height: 30px;
+        display: inline-flex;
+        align-items: center;
     }
     
     .equipment-item {
