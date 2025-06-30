@@ -60,6 +60,7 @@ export const gyms = [
         seasonStart: "2025-08-18",
         seasonEnd: "2025-12-14",
         actualParkourGym: true,
+        equipment: ["Small trampoline & mattresses", "Airtrack"],
         shifts: {
             "Saturday": {
                 startTime: "18",
