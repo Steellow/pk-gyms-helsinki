@@ -31,24 +31,24 @@ export const gyms = [
         seasonEnd: "2025-07-04",
         shifts: {
             "Monday": {
-                startTime: "10",
+                startTime: "14",
                 endTime: "16"
             },
             "Tuesday": {
-                startTime: "10",
-                endTime: "16"
+                startTime: "14",
+                endTime: "17"
             },
             "Wednesday": {
-                startTime: "10",
-                endTime: "16"
+                startTime: "14",
+                endTime: "17"
             },
             "Thursday": {
-                startTime: "10",
+                startTime: "14",
                 endTime: "16"
             },
             "Friday": {
-                startTime: "10",
-                endTime: "16"
+                startTime: "14",
+                endTime: "17"
             }
         }
     },
@@ -145,36 +145,35 @@ export const gyms = [
         price: "24.9 € / 2h, other options available",
         disclaimer: "Trampoline park, mostly kids so might be annoying to train at. Tickets are chaper to reserve online.",
         equipment: ["Lots of trampolines", "Foam pits", "High platform to foam pit", "Angled trampoline to foam pit"],
-        website: "https://rushfinland.fi/hinnasto-ja-aukioloajat",
-        seasonEnd: "2025-08-05",
+        website: "https://rushfinland.fi/hinnasto-ja-aukioloajat#hours",
         shifts: {
             "Monday": {
-                startTime: "10",
-                endTime: "20"
+                startTime: "14",
+                endTime: "21"
             },
             "Tuesday": {
-                startTime: "10",
-                endTime: "20"
+                startTime: "14",
+                endTime: "21"
             },
             "Wednesday": {
-                startTime: "10",
-                endTime: "20"
+                startTime: "14",
+                endTime: "21"
             },
             "Thursday": {
-                startTime: "10",
-                endTime: "20"
+                startTime: "14",
+                endTime: "21"
             },
             "Friday": {
-                startTime: "10",
-                endTime: "20"
+                startTime: "14",
+                endTime: "21"
             },
             "Saturday": {
-                startTime: "10",
-                endTime: "20"
+                startTime: "9",
+                endTime: "21"
             },
             "Sunday": {
-                startTime: "10",
-                endTime: "18"
+                startTime: "9",
+                endTime: "19"
             }
         }
     },
